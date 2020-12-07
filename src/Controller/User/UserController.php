@@ -2,11 +2,14 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Group;
 use App\Entity\User;
 use App\Entity\InscriptionSolo;
 use App\Repository\UserRepository;
 use App\Form\EditAccountUserFormType;
+use App\Form\GroupFormType;
 use App\Form\InscriptionSoloFormType;
+use App\Repository\GroupRepository;
 use App\Repository\InscriptionSoloRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,6 +57,22 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("profile/inscription/solo/{id}/delete", name="inscription_solo_delete", methods="SUPUSERSOLO")
+     */
+    public function deleteInscriptionSolo(Request $request, InscriptionSolo $inscriptionSolo): Response
+    {
+
+        if ($this->isCsrfTokenValid('SUPUSERSOLO'.$inscriptionSolo->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($inscriptionSolo);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('inscription_solo');
+    }
+
+
+    /**
      * @Route("profile/inscription/solo", name="inscription_solo"))
      * 
      */
@@ -98,19 +117,66 @@ class UserController extends AbstractController
 
     }
 
+
+
     /**
-     * @Route("profile/inscription/solo/{id}/delete", name="inscription_solo_delete", methods="SUPUSERSOLO")
+     * @Route("profile/groupe", name="groupe"))
+     * 
      */
-    public function deleteInscriptionSolo(Request $request, InscriptionSolo $inscriptionSolo): Response
+    public function infoGroupe(GroupRepository $repo, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $infos= $repo->findOneByUserId($userId);
+        return $this->render('home/user/groupe.html.twig', compact('user', 'infos'));
+    }
+
+    /**
+     * @Route("/profile/creation-groupe/edit", name="creation_groupe_edit", methods="GET|POST")
+     * @Route("/profile/creation-groupe/creer", name="creation_groupe_ajout")
+     */
+    public function createGroup(Request $request, EntityManagerInterface $em, GroupRepository $repo): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $creationGroupe= $repo->findOneByUserId($userId);
+
+
+        if(!$creationGroupe){
+            $creationGroupe = new Group();
+            $creationGroupe->setUser($user);
+        }
+
+       $modif = $creationGroupe->getUser() !== $user;
+
+       $form = $this->createForm(GroupFormType::class, $creationGroupe);
+       $form->handleRequest($request);
+
+       if($form->isSubmitted() && $form->isValid()){
+           $em->persist($creationGroupe);
+           $em->flush();
+
+           $this->addFlash('message', $modif ? 'Groupe modifié avec succès' : 'Inscription effectué avec succès');
+
+           return $this->redirectToRoute('groupe');
+       }
+       return $this->render('home/user/creationGroupe.html.twig',['formulaireCreaGroupe'=>$form->createView()]);
+    }
+
+    /**
+     * @Route("profile/groupe/{id}/delete", name="groupe_delete", methods="SUPGROUP")
+     */
+    public function deleteGroup(Request $request, Group $group): Response
     {
 
-        if ($this->isCsrfTokenValid('SUPUSERSOLO'.$inscriptionSolo->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('SUPGROUP'.$group->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($inscriptionSolo);
+            $entityManager->remove($group);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('inscription_solo');
     }
+
     
 }

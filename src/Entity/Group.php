@@ -67,7 +67,7 @@ class Group
     private $infosGroup;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="addGroup", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="addGroup")
      */
     private $user;
 

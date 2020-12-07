@@ -9,10 +9,13 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
     [
         'stdClass' => [
             'targetEntity' => [
-                'App\\Entity\\user',
+                'App\\Entity\\User',
             ],
-            'nullable' => [
-                1 => false,
+            'name' => [
+                1 => 'user_id',
+            ],
+            'onDelete' => [
+                1 => 'CASCADE',
             ],
         ],
     ],

@@ -10,11 +10,11 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
         'Symfony\\Component\\Routing\\Annotation\\Route' => [
             'path' => [
                 '/profile/inscription/solo/edit',
-                '/profile/inscription/solo',
+                '/profile/inscription/solo/minscrire',
             ],
             'name' => [
                 'inscription_solo_edit',
-                'inscription_solo',
+                'inscription_solo_ajout',
             ],
             'methods' => [
                 [

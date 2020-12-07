@@ -66,10 +66,10 @@ class Categorie extends \App\Entity\Categorie implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'libelleCategorie', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'inscriptionSolos'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'libelleCategorie', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'inscriptionSolos', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'CategorieGroup'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'libelleCategorie', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'inscriptionSolos'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'libelleCategorie', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'inscriptionSolos', '' . "\0" . 'App\\Entity\\Categorie' . "\0" . 'CategorieGroup'];
     }
 
     /**
@@ -244,6 +244,39 @@ class Categorie extends \App\Entity\Categorie implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeInscriptionSolo', [$inscriptionSolo]);
 
         return parent::removeInscriptionSolo($inscriptionSolo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCategorieGroup(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCategorieGroup', []);
+
+        return parent::getCategorieGroup();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addCategorieGroup(\App\Entity\Group $categorieGroup): \App\Entity\Categorie
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCategorieGroup', [$categorieGroup]);
+
+        return parent::addCategorieGroup($categorieGroup);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeCategorieGroup(\App\Entity\Group $categorieGroup): \App\Entity\Categorie
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCategorieGroup', [$categorieGroup]);
+
+        return parent::removeCategorieGroup($categorieGroup);
     }
 
 }
