@@ -47,4 +47,7 @@ return [
     'creation_groupe_edit' => [[], ['_controller' => 'App\\Controller\\User\\UserController::createGroup'], [], [['text', '/profile/creation-groupe/edit']], [], []],
     'creation_groupe_ajout' => [[], ['_controller' => 'App\\Controller\\User\\UserController::createGroup'], [], [['text', '/profile/creation-groupe/creer']], [], []],
     'groupe_delete' => [['id'], ['_controller' => 'App\\Controller\\User\\UserController::deleteGroup'], [], [['text', '/delete'], ['variable', '/', '[^/]++', 'id', true], ['text', '/profile/groupe']], [], []],
+    'inscription_groupe' => [[], ['_controller' => 'App\\Controller\\User\\UserController::infosInscriptionGroupe'], [], [['text', '/profile/inscription/groupe']], [], []],
+    'inscription_groupe_edit' => [[], ['_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], [], [['text', '/profile/inscription/groupe/edit']], [], []],
+    'inscription_groupe_ajout' => [[], ['_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], [], [['text', '/profile/inscription/groupe/minscrire']], [], []],
 ];

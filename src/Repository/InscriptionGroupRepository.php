@@ -36,15 +36,13 @@ class InscriptionGroupRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?InscriptionGroup
+    public function findOneByUserId($value)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
+        return $this->createQueryBuilder('inscriptionSolo')
+            ->andWhere('inscriptionSolo.user = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
-    }
-    */
+    } 
 }

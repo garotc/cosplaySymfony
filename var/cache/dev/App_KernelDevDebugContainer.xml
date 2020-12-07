@@ -5578,7 +5578,14 @@
         <argument key="group" type="service" id=".errored..service_locator.1ScvF58.App\Entity\Group"/>
       </argument>
     </service>
-    <service id=".service_locator.Y8ONcvv" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.MXxBuTq" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repo" type="service" id="App\Repository\InscriptionGroupRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.xSwZiAy" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminController::affInscriptionSolo" type="service" id=".service_locator.4oNQG9h"/>
@@ -5603,7 +5610,9 @@
         <argument key="App\Controller\User\UserController::editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\User\UserController::getInfosUser" type="service" id=".service_locator.fw6ySEy"/>
         <argument key="App\Controller\User\UserController::infoGroupe" type="service" id=".service_locator.fGAMVDj"/>
+        <argument key="App\Controller\User\UserController::infosInscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController::infosInscriptionSolo" type="service" id=".service_locator.WX7skS."/>
+        <argument key="App\Controller\User\UserController::inscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController::inscriptionSolo" type="service" id=".service_locator.WX7skS."/>
         <argument key="App\Kernel::loadRoutes" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service" id=".service_locator.C9JCBPC"/>
@@ -5633,7 +5642,9 @@
         <argument key="App\Controller\User\UserController:editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\User\UserController:getInfosUser" type="service" id=".service_locator.fw6ySEy"/>
         <argument key="App\Controller\User\UserController:infoGroupe" type="service" id=".service_locator.fGAMVDj"/>
+        <argument key="App\Controller\User\UserController:infosInscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController:infosInscriptionSolo" type="service" id=".service_locator.WX7skS."/>
+        <argument key="App\Controller\User\UserController:inscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController:inscriptionSolo" type="service" id=".service_locator.WX7skS."/>
         <argument key="kernel:loadRoutes" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="kernel:registerContainerConfiguration" type="service" id=".service_locator.C9JCBPC"/>
@@ -6143,12 +6154,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.Y8ONcvv"/>
+      <argument type="service" id=".service_locator.xSwZiAy"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.Y8ONcvv"/>
+      <argument type="service" id=".service_locator.xSwZiAy"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -6556,7 +6567,7 @@
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.WaGDpDt" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.Y8ONcvv"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.xSwZiAy"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

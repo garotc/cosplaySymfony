@@ -1,7 +1,46 @@
  {% extends 'base.html.twig' %}
 
-{% block title %}Inscription Groupe{% endblock %}
+{% block title %}Inscription Solo{% endblock %}
 
 {% block body %}
-<h1>Hello !</h1>
+
+{% if infos %}
+
+<div class='row'>
+<div class="col-sm-12 col-md-6 useraccount m-auto p-3">
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-12">Nom du personnage : {{ infos.NomPersoGroup }}</div>
+            <div class="col-sm-12 col-md-12">Nom du groupe : {{ infos.RelatedGroup.NameGroup }}</div>
+            <hr>
+            <p>Si des informations sur le groupe sont fausses, n'hésite pas à contacter celui qui a fait le groupe</p>
+            <div class="col-sm-12 col-md-12">Univers du groupe : {{ infos.RelatedGroup.universGroup }}</div>
+            <div class="col-sm-12 col-md-12">Au moins une personne a besoin d'aider pour monter sur scène :
+            {% if infos.RelatedGroup.aideSceneGroup == 1 %} 
+            Oui
+            {%else%}
+            Non
+            {% endif %}
+            </div>
+            <div class="col-sm-12 col-md-12">Créateur du groupe : {{ infos.RelatedGroup.user.pseudo }}</div> <div class="row py-1">
+        </div>
+            <div class="col-sm-12 col-md-12">descriptionAccessoiresGroup : {{ infos.RelatedGroup.descriptionAccessoiresGroup }}</div>
+            <div class="col-sm-12 col-md-12">Infos supplémentaires : {{ infos.RelatedGroup.infosGroup }}</div>
+        </div>
+        <div class="row mb-3">
+            <a href="{{path('inscription_groupe_edit',{'id':infos.id})}}" class="btn btn-warning col-4 m-auto">Editer</a>
+
+            <form method="POST" class='col-4 m-auto btn' action="{{path('inscription_solo_delete',{'id':infos.id})}}"
+                onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                    <input type="hidden" name="_method" value="SUPUSERSOLO">
+                        <input type="hidden" name="_token" value="{{csrf_token('SUPUSERSOLO' ~ infos.id)}}">
+                                                <input type="submit" class="btn btn-danger" value="Supprimer">
+            </form>
+</div>
+{% else %}
+
+
+<a href="{{path('inscription_groupe_ajout')}}" class="btn btn-warning col-4 m-auto">M'inscrire au concours de groupe</a>
+
+{% endif %}
+</div>
 {% endblock %}

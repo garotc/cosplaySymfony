@@ -2,17 +2,20 @@
 
 namespace App\Controller\User;
 
-use App\Entity\Group;
 use App\Entity\User;
+use App\Entity\Group;
+use App\Entity\InscriptionGroup;
+use App\Form\GroupFormType;
 use App\Entity\InscriptionSolo;
 use App\Repository\UserRepository;
-use App\Form\EditAccountUserFormType;
-use App\Form\GroupFormType;
-use App\Form\InscriptionSoloFormType;
 use App\Repository\GroupRepository;
-use App\Repository\InscriptionSoloRepository;
+use App\Form\EditAccountUserFormType;
+use App\Form\InscriptionSoloFormType;
+use App\Form\InscriptionGroupFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InscriptionSoloRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\InscriptionGroupRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -176,6 +179,51 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('inscription_solo');
+    }
+
+        /**
+     * @Route("profile/inscription/groupe", name="inscription_groupe"))
+     * 
+     */
+    public function infosInscriptionGroupe(InscriptionGroupRepository $repo, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $infos= $repo->findOneByUserId($userId);
+        return $this->render('home/user/inscriptiongroup.html.twig', compact('user', 'infos'));
+    }
+    
+    /**
+     * @Route("/profile/inscription/groupe/edit", name="inscription_groupe_edit", methods="GET|POST")
+     * @Route("/profile/inscription/groupe/minscrire", name="inscription_groupe_ajout")
+     */
+    public function inscriptionGroupe(Request $request, EntityManagerInterface $em, InscriptionGroupRepository $repo): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $inscriptionGroup= $repo->findOneByUserId($userId);
+
+        if(!$inscriptionGroup){
+            $inscriptionGroup = new InscriptionGroup();
+            $inscriptionGroup->setUser($user);
+        }
+
+       $modif = $inscriptionGroup->getUser() !== $user;
+
+       $form = $this->createForm(InscriptionGroupFormType::class, $inscriptionGroup);
+       $form->handleRequest($request);
+
+       if($form->isSubmitted() && $form->isValid()){
+           $em->persist($inscriptionGroup);
+           $em->flush();
+
+           $this->addFlash('message', $modif ? 'Inscription modifié avec succès' : 'Inscription effectuée avec succès');
+
+           return $this->redirectToRoute('inscription_groupe');
+       }
+
+       return $this->render('home/user/editInscriptionGroup.html.twig',['formulaireMembreGroupe'=>$form->createView()]);
+
     }
 
     

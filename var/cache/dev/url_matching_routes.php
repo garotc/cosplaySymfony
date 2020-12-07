@@ -35,6 +35,9 @@ return [
         '/profile/groupe' => [[['_route' => 'groupe', '_controller' => 'App\\Controller\\User\\UserController::infoGroupe'], null, null, null, false, false, null]],
         '/profile/creation-groupe/edit' => [[['_route' => 'creation_groupe_edit', '_controller' => 'App\\Controller\\User\\UserController::createGroup'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/profile/creation-groupe/creer' => [[['_route' => 'creation_groupe_ajout', '_controller' => 'App\\Controller\\User\\UserController::createGroup'], null, null, null, false, false, null]],
+        '/profile/inscription/groupe' => [[['_route' => 'inscription_groupe', '_controller' => 'App\\Controller\\User\\UserController::infosInscriptionGroupe'], null, null, null, false, false, null]],
+        '/profile/inscription/groupe/edit' => [[['_route' => 'inscription_groupe_edit', '_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/profile/inscription/groupe/minscrire' => [[['_route' => 'inscription_groupe_ajout', '_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
