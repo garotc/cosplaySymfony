@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<div class="container justify-content-center">
+    <div class=" col-6 m-auto">
+
+
+
+    <div class="form"> 
+    {{ form_start(formulaireSolo) }}
+    <h2 class="col-6 m-auto">Formulaire d'inscription au concours solo</h2>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.univerSolo,{"attr":{ placeholder:'DBZ, One Piece, ...', class:'form-control'}}) }}
+        </div>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.categorie,{"attr":{class:'form-control'}}) }}
+        </div>
+
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.nomPersoSolo,{"attr":{ placeholder:'Nom du personnage', class:'form-control'}}) }}
+        </div>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.mediaSolo,{"attr":{class:'form-control'}}) }}
+        </div>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.envoiMediaSolo,{"attr":{class:'form-control'}}) }}
+        </div>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.aideSolo,{"attr":{class:'form-control'}}) }}
+        </div>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.accessoireSolo,{"attr":{class:'form-control'}}) }}
+        </div>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.descriptionAccessoireSolo,{"attr":{ placeholder:'Hache à déposer sur le devant la scène,...', class:'form-control'}}) }}
+        </div>
+        <div class="form-group col-6 mx-auto">
+            {{ form_row(formulaireSolo.infosSolo,{"attr":{ placeholder:'Informations supplémentaires...', class:'form-control'}}) }}
+        </div>
+
+        {# bouton enregistrer #}
+        <div class="form-group col-6 mx-auto"> {{ form_row(formulaireSolo.Enregistrer,{"attr":{ label:'Enregistrer', class:'btn btn-warning m-auto'}}) }}</div>
+
+
+    {{ form_end(formulaireSolo) }}
+    </div>
+
+    </div>
+</div>
+
+{% endblock %}

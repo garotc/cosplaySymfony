@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<section class='row p-auto'>
+{% for user in users %}
+
+    <div class="col-sm-12 col-md-3 affUser m-1 p-2">
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-12">Pseudo : {{ user.pseudo }}</div>
+        </div>
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-12">Email : {{ user.email }}</div>
+        </div>
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-6">Nom : {{ user.nom }}</div>
+            <div class="col-sm-12 col-md-6">Prénom : {{ user.prenom }}</div>
+        </div>
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-12">Téléphone : {{ user.telephone }}</div>
+        </div>
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-12">Compte créé le : {{ user.createdAt | date('d/m/Y',"Europe/Paris")}}</div>
+        </div>
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-12">Compte édité pour la dernière fois le : {{ user.updatedAt | date('d/m/Y',"Europe/Paris")}}</div>
+        </div>
+        <div class="row py-1">
+            <div class="col-sm-12 col-md-12">A créé un groupe : 
+            {% if user.createGroup == 1 %}
+                Oui
+            {% else %}
+                Non
+            {% endif %}</div>
+        </div>
+        <div class="row mb-3">
+            <a href="{{path('admin_user_edit',{'id':user.id})}}" class="btn btn-warning col-4 m-auto">Editer</a>
+
+            {# Bouton delete #}
+            <form method="POST" class='col-4 m-auto btn' action="{{path('admin_user_delete',{'id':user.id})}}"
+            onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                <input type="hidden" name="_method" value="SUP">
+                <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ user.id)}}">
+                <input type="submit" class="btn btn-danger" value="Supprimer">
+            </form>
+        </div>
+    </div>
+
+{% endfor %}
+</section>
+
+{% endblock %}

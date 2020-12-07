@@ -1,0 +1,34 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<div class='row'>
+    <div class="col-sm-12 col-md-6 useraccount m-auto p-3">
+        <div class="row">
+            <h3 class="col-sm-12 col-md-4 m-auto">Mon compte</h3>
+        </div>
+        <div class="row py-3">
+            <div class="col-sm-12 col-md-4">Pseudo : {{ user.pseudo }}</div>
+        </div>
+        <div class="row py-3">
+            <div class="col-sm-12 col-md-4">Email : {{ user.email }}</div>
+        </div>
+        <div class="row py-3">
+            <div class="col-sm-12 col-md-4">Nom : {{ user.nom }}</div>
+            <div class="col-sm-12 col-md-4">Prénom : {{ user.prenom }}</div>
+        </div>
+        <div class="row py-3">
+            <div class="col-sm-12 col-md-4">Téléphone : {{ user.telephone }}</div>
+        </div>
+        <div class="row py-3">
+            <div class="col-sm-12 col-md-4">Compte créé le : {{ user.createdAt | date('d/m/Y',"Europe/Paris")}}</div>
+            <div class="col-sm-12 col-md-6">Compte édité pour la dernière fois le : {{ user.updatedAt | date('d/m/Y',"Europe/Paris")}}</div>
+        </div>
+        <div class="row py-3">
+        <a href="{{path('user_edit')}}" class="btn col-sm-6 col-md-3 m-auto btn-outline-light">Modifier des informations</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

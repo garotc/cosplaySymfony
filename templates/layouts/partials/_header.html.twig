@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>{% block title %}Cosplay au CGS{% endblock %}</title>
+
+        <link rel="icon" href="../public/images/favicon.png">
+        <!-- Latest compiled and minified CSS -->
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+        <link rel='stylesheet' href="{{asset('css/main.css')}}">
+
+        <!--Font awesome-->
+        <script src="https://kit.fontawesome.com/4afbbf917f.js" crossorigin="anonymous"></script>
+
+        {% block stylesheets %}{% endblock %}
+
+    </head>
+    <body class='container-fluid'>
+    <div class="row margebody"></div>
+    <header class = 'row'>
+        <div class="col-12 m-0 p-0">
+            <div class="row menu">
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ include('layouts/partials/_navadmin.html.twig') }}
+            {% else %}
+                {{ include('layouts/partials/_nav.html.twig') }}
+            {% endif %}
+            </div>
+        </div>
+    </header>
+ 

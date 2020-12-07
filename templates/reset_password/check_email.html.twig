@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Password Reset Email Sent{% endblock %}
+
+{% block body %}
+<div class="form">
+    <p>Un email vient de t'être envoyé. Attention le lien expire dans une {{ tokenLifetime|date('g') }} heure(s).</p>
+    <p>Si tu ne l'as pas reçu, n'oublies pas de vérifier tes spams :) 
+    <a href="{{ path('app_forgot_password_request') }}">Renvoyer</a>
+    </p>
+    </div>
+{% endblock %}
