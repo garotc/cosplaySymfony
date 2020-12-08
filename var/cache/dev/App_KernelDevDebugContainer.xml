@@ -5519,6 +5519,24 @@
         <argument key="group" type="service" id=".errored..service_locator.1ScvF58.App\Entity\Group"/>
       </argument>
     </service>
+    <service id=".service_locator..q.MlrH" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service" id="App\Repository\InscriptionGroupRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.T1hHirv" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="inscriptiongroup" type="service" id=".errored..service_locator.T1hHirv.App\Entity\InscriptionGroup"/>
+      </argument>
+    </service>
+    <service id=".service_locator.yU9tfSX" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="inscriptionGroup" type="service" id=".errored..service_locator.yU9tfSX.App\Entity\InscriptionGroup"/>
+      </argument>
+    </service>
     <service id=".service_locator.9aMSQQN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5597,17 +5615,20 @@
         <argument key="group" type="service" id=".errored..service_locator.q0UdWW5.App\Entity\InscriptionGroup"/>
       </argument>
     </service>
-    <service id=".service_locator.2dpdVYX" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.vYyNli0" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminController::affGroup" type="service" id=".service_locator..2YZhIH"/>
+        <argument key="App\Controller\Admin\AdminController::affInscriptionGroup" type="service" id=".service_locator..q.MlrH"/>
         <argument key="App\Controller\Admin\AdminController::affInscriptionSolo" type="service" id=".service_locator.4oNQG9h"/>
         <argument key="App\Controller\Admin\AdminController::affUser" type="service" id=".service_locator.RTUGCCW"/>
         <argument key="App\Controller\Admin\AdminController::ajouterCategorie" type="service" id=".service_locator.O30o4K4"/>
         <argument key="App\Controller\Admin\AdminController::deleteGroup" type="service" id=".service_locator.1ScvF58"/>
+        <argument key="App\Controller\Admin\AdminController::deleteInscriptionGroup" type="service" id=".service_locator.yU9tfSX"/>
         <argument key="App\Controller\Admin\AdminController::deleteInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController::deleteUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\Admin\AdminController::editGroupe" type="service" id=".service_locator.1ScvF58"/>
+        <argument key="App\Controller\Admin\AdminController::editInscriptionGroup" type="service" id=".service_locator.T1hHirv"/>
         <argument key="App\Controller\Admin\AdminController::editInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController::editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\CategorieController::delete" type="service" id=".service_locator.57pSehj"/>
@@ -5637,13 +5658,16 @@
         <argument key="kernel::registerContainerConfiguration" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="kernel::terminate" type="service" id=".service_locator.beq5mCo"/>
         <argument key="App\Controller\Admin\AdminController:affGroup" type="service" id=".service_locator..2YZhIH"/>
+        <argument key="App\Controller\Admin\AdminController:affInscriptionGroup" type="service" id=".service_locator..q.MlrH"/>
         <argument key="App\Controller\Admin\AdminController:affInscriptionSolo" type="service" id=".service_locator.4oNQG9h"/>
         <argument key="App\Controller\Admin\AdminController:affUser" type="service" id=".service_locator.RTUGCCW"/>
         <argument key="App\Controller\Admin\AdminController:ajouterCategorie" type="service" id=".service_locator.O30o4K4"/>
         <argument key="App\Controller\Admin\AdminController:deleteGroup" type="service" id=".service_locator.1ScvF58"/>
+        <argument key="App\Controller\Admin\AdminController:deleteInscriptionGroup" type="service" id=".service_locator.yU9tfSX"/>
         <argument key="App\Controller\Admin\AdminController:deleteInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController:deleteUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\Admin\AdminController:editGroupe" type="service" id=".service_locator.1ScvF58"/>
+        <argument key="App\Controller\Admin\AdminController:editInscriptionGroup" type="service" id=".service_locator.T1hHirv"/>
         <argument key="App\Controller\Admin\AdminController:editInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController:editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\CategorieController:delete" type="service" id=".service_locator.57pSehj"/>
@@ -6174,12 +6198,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.2dpdVYX"/>
+      <argument type="service" id=".service_locator.vYyNli0"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.2dpdVYX"/>
+      <argument type="service" id=".service_locator.vYyNli0"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -6193,6 +6217,8 @@
     <service id=".errored..service_locator.C9JCBPC.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
     <service id=".errored..service_locator.4MW7.KG.App\Entity\InscriptionSolo" class="App\Entity\InscriptionSolo"/>
     <service id=".errored..service_locator.1ScvF58.App\Entity\Group" class="App\Entity\Group"/>
+    <service id=".errored..service_locator.T1hHirv.App\Entity\InscriptionGroup" class="App\Entity\InscriptionGroup"/>
+    <service id=".errored..service_locator.yU9tfSX.App\Entity\InscriptionGroup" class="App\Entity\InscriptionGroup"/>
     <service id=".errored..service_locator.57pSehj.App\Entity\Categorie" class="App\Entity\Categorie"/>
     <service id=".errored..service_locator.0l1nthY.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.2wd8YtR.App\Entity\InscriptionSolo" class="App\Entity\InscriptionSolo"/>
@@ -6588,7 +6614,7 @@
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.WaGDpDt" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.2dpdVYX"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.vYyNli0"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

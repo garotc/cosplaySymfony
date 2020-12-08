@@ -8,14 +8,17 @@ use App\Entity\Categorie;
 use App\Form\GroupFormType;
 use App\Entity\InscriptionSolo;
 use App\Form\CategorieFormType;
+use App\Entity\InscriptionGroup;
 use App\Repository\UserRepository;
 use App\Repository\GroupRepository;
 use App\Form\EditAccountUserFormType;
 use App\Form\InscriptionSoloFormType;
+use App\Form\InscriptionGroupFormType;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\InscriptionSoloRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\InscriptionGroupRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -176,7 +179,7 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("admin/group/{id}/delete", name="admin_groupe_delete", methods="SUPGROUP")
+     * @Route("admin/groupe/{id}/delete", name="admin_groupe_delete", methods="SUPGROUP")
      */
     public function deleteGroup(Request $request, Group $group): Response
     {
@@ -189,4 +192,46 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_aff_groupe');
     }
 //--------------------------------INSCRIPTIONS GROUPE--------------------------------//
+    /**
+     * @Route("/admin/inscription/groupe", name="admin_aff_inscription_groupe")
+     */
+    public function affInscriptionGroup(InscriptionGroupRepository $repo): Response
+    {
+        $creation = $this->getUser();
+        $inscriptionsGroup = $repo->findAll();
+        //dd($inscriptionsSolo); 
+        return $this->render('admin/inscriptionGroup.html.twig', compact('creation','inscriptionsGroup'));
+    }
+    /**
+     * @Route("admin/inscription/group/{id}/edit", name="admin_inscription_groupe_edit", methods={"GET","POST"})
+     */
+    public function editInscriptionGroup(Request $request, InscriptionGroup $inscriptiongroup): Response
+    {
+        $form = $this->createForm(InscriptionGroupFormType::class, $inscriptiongroup);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_aff_inscription_groupe');
+        }
+
+        return $this->render('admin/editGroup.html.twig', [
+            'inscriptiongroup' => $inscriptiongroup,
+            'editgroupform' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("admin/inscription/group/{id}/delete", name="admin_inscription_groupe_delete", methods="SUPINSCRIGROUP")
+     */
+    public function deleteInscriptionGroup(Request $request, InscriptionGroup $inscriptionGroup): Response
+    {
+        if ($this->isCsrfTokenValid('SUPINSCRIGROUP'.$inscriptionGroup->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($inscriptionGroup);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_aff_inscription_groupe');
+    }
 }
