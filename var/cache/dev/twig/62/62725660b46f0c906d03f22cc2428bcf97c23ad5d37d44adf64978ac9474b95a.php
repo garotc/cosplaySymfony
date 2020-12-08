@@ -87,20 +87,47 @@ class __TwigTemplate_04a17891291d0d1e79b23932d7383498c926b7ceca2d2f971889129737d
             echo "\">Inscription concours</a>
         </li>
         <li class=\"nav-item\">
-            <a class=\"nav-link ml-auto\" href=\"";
+            <a class=\"nav-link\" href=\"";
             // line 27
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("inscription_groupe");
+            echo "\">Inscription concours groupe</a>
+        </li>
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"";
+            // line 30
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("groupe");
+            echo "\">Créer groupe</a>
+        </li>
+        
+        <li class=\"dropdown-menu nav-item\" aria-labelledby=\"navbarDropdown\">          
+          <a class=\"dropdown-item\" href=\"";
+            // line 34
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("inscription_solo");
+            echo "\">Inscriptions solo</a>
+          <a class=\"dropdown-item\" href=\"";
+            // line 35
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("inscription_groupe");
+            echo "\">Inscriptions groupe</a>
+          <a class=\"dropdown-item\" href=\"";
+            // line 36
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("groupe");
+            echo "\">Ajouter un groupe</a>
+        </li>
+        <li class=\"nav-item\">
+            <a class=\"nav-link ml-auto\" href=\"";
+            // line 39
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("_app_user_account");
             echo "\">Mon compte</a>
         </li>
         <li class=\"nav-item ml-auto mr-5\">
             <a class=\"nav-link\" href=\"";
-            // line 30
+            // line 42
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             echo "\">Déconnexion</a>
         </li>
 ";
         }
-        // line 33
+        // line 45
         echo "    </ul>
 
 
@@ -126,7 +153,7 @@ class __TwigTemplate_04a17891291d0d1e79b23932d7383498c926b7ceca2d2f971889129737d
 
     public function getDebugInfo()
     {
-        return array (  104 => 33,  98 => 30,  92 => 27,  86 => 24,  83 => 23,  77 => 20,  71 => 17,  68 => 16,  66 => 15,  60 => 12,  56 => 11,  53 => 10,  43 => 1,);
+        return array (  131 => 45,  125 => 42,  119 => 39,  113 => 36,  109 => 35,  105 => 34,  98 => 30,  92 => 27,  86 => 24,  83 => 23,  77 => 20,  71 => 17,  68 => 16,  66 => 15,  60 => 12,  56 => 11,  53 => 10,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -155,6 +182,18 @@ class __TwigTemplate_04a17891291d0d1e79b23932d7383498c926b7ceca2d2f971889129737d
 {% else %}
         <li class=\"nav-item\">
             <a class=\"nav-link\" href=\"{{path('inscription_solo')}}\">Inscription concours</a>
+        </li>
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"{{path('inscription_groupe')}}\">Inscription concours groupe</a>
+        </li>
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"{{path('groupe')}}\">Créer groupe</a>
+        </li>
+        
+        <li class=\"dropdown-menu nav-item\" aria-labelledby=\"navbarDropdown\">          
+          <a class=\"dropdown-item\" href=\"{{path('inscription_solo')}}\">Inscriptions solo</a>
+          <a class=\"dropdown-item\" href=\"{{path('inscription_groupe')}}\">Inscriptions groupe</a>
+          <a class=\"dropdown-item\" href=\"{{path('groupe')}}\">Ajouter un groupe</a>
         </li>
         <li class=\"nav-item\">
             <a class=\"nav-link ml-auto\" href=\"{{path('_app_user_account')}}\">Mon compte</a>

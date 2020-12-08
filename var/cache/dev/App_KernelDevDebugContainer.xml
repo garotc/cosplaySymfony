@@ -407,6 +407,12 @@
     <service id="App\Form\EditAccountUserFormType" class="App\Form\EditAccountUserFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\GroupFormType" class="App\Form\GroupFormType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\InscriptionGroupFormType" class="App\Form\InscriptionGroupFormType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\InscriptionSoloFormType" class="App\Form\InscriptionSoloFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -900,6 +906,8 @@
         <argument>App\Form\CategorieType</argument>
         <argument>App\Form\ChangePasswordFormType</argument>
         <argument>App\Form\EditAccountUserFormType</argument>
+        <argument>App\Form\GroupFormType</argument>
+        <argument>App\Form\InscriptionGroupFormType</argument>
         <argument>App\Form\InscriptionSoloFormType</argument>
         <argument>App\Form\InscriptionSoloType</argument>
         <argument>App\Form\RegistrationFormType</argument>
@@ -1245,7 +1253,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.WrgfcBP"/>
+      <argument type="service" id=".service_locator.SfmKVmu"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5192,6 +5200,10 @@
     <service id=".abstract.instanceof.App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EditAccountUserFormType" class="App\Form\EditAccountUserFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\EditAccountUserFormType" class="App\Form\EditAccountUserFormType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\GroupFormType" class="App\Form\GroupFormType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\GroupFormType" class="App\Form\GroupFormType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionGroupFormType" class="App\Form\InscriptionGroupFormType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\InscriptionGroupFormType" class="App\Form\InscriptionGroupFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloFormType" class="App\Form\InscriptionSoloFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\InscriptionSoloFormType" class="App\Form\InscriptionSoloFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloType" class="App\Form\InscriptionSoloType" autowire="true" abstract="true"/>
@@ -5495,6 +5507,18 @@
         <argument key="solo" type="service" id=".errored..service_locator.4MW7.KG.App\Entity\InscriptionSolo"/>
       </argument>
     </service>
+    <service id=".service_locator..2YZhIH" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service" id="App\Repository\GroupRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.1ScvF58" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="group" type="service" id=".errored..service_locator.1ScvF58.App\Entity\Group"/>
+      </argument>
+    </service>
     <service id=".service_locator.9aMSQQN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5540,6 +5564,12 @@
         <argument key="repo" type="service" id="App\Repository\UserRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.2wd8YtR" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="inscriptionSolo" type="service" id=".errored..service_locator.2wd8YtR.App\Entity\InscriptionSolo"/>
+      </argument>
+    </service>
     <service id=".service_locator.WX7skS." class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5547,20 +5577,37 @@
         <argument key="repo" type="service" id="App\Repository\InscriptionSoloRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.2wd8YtR" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.fGAMVDj" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="inscriptionSolo" type="service" id=".errored..service_locator.2wd8YtR.App\Entity\InscriptionSolo"/>
+        <argument key="em" type="service" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repo" type="service" id="App\Repository\GroupRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.q98HjwH" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.MXxBuTq" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="em" type="service" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repo" type="service" id="App\Repository\InscriptionGroupRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.q0UdWW5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="group" type="service" id=".errored..service_locator.q0UdWW5.App\Entity\InscriptionGroup"/>
+      </argument>
+    </service>
+    <service id=".service_locator.2dpdVYX" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Controller\Admin\AdminController::affGroup" type="service" id=".service_locator..2YZhIH"/>
         <argument key="App\Controller\Admin\AdminController::affInscriptionSolo" type="service" id=".service_locator.4oNQG9h"/>
         <argument key="App\Controller\Admin\AdminController::affUser" type="service" id=".service_locator.RTUGCCW"/>
         <argument key="App\Controller\Admin\AdminController::ajouterCategorie" type="service" id=".service_locator.O30o4K4"/>
+        <argument key="App\Controller\Admin\AdminController::deleteGroup" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController::deleteInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController::deleteUser" type="service" id=".service_locator.dNCO0Nf"/>
+        <argument key="App\Controller\Admin\AdminController::editGroupe" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController::editInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController::editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\CategorieController::delete" type="service" id=".service_locator.57pSehj"/>
@@ -5572,10 +5619,16 @@
         <argument key="App\Controller\ResetPasswordController::request" type="service" id=".service_locator.A0rcl1e"/>
         <argument key="App\Controller\ResetPasswordController::reset" type="service" id=".service_locator.j5_bHjD"/>
         <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.xA8Fw_."/>
+        <argument key="App\Controller\User\UserController::createGroup" type="service" id=".service_locator.fGAMVDj"/>
+        <argument key="App\Controller\User\UserController::deleteGroup" type="service" id=".service_locator.1ScvF58"/>
+        <argument key="App\Controller\User\UserController::deleteInscriptionGroupe" type="service" id=".service_locator.q0UdWW5"/>
         <argument key="App\Controller\User\UserController::deleteInscriptionSolo" type="service" id=".service_locator.2wd8YtR"/>
         <argument key="App\Controller\User\UserController::editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\User\UserController::getInfosUser" type="service" id=".service_locator.fw6ySEy"/>
+        <argument key="App\Controller\User\UserController::infoGroupe" type="service" id=".service_locator.fGAMVDj"/>
+        <argument key="App\Controller\User\UserController::infosInscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController::infosInscriptionSolo" type="service" id=".service_locator.WX7skS."/>
+        <argument key="App\Controller\User\UserController::inscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController::inscriptionSolo" type="service" id=".service_locator.WX7skS."/>
         <argument key="App\Kernel::loadRoutes" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service" id=".service_locator.C9JCBPC"/>
@@ -5583,11 +5636,14 @@
         <argument key="kernel::loadRoutes" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="kernel::registerContainerConfiguration" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="kernel::terminate" type="service" id=".service_locator.beq5mCo"/>
+        <argument key="App\Controller\Admin\AdminController:affGroup" type="service" id=".service_locator..2YZhIH"/>
         <argument key="App\Controller\Admin\AdminController:affInscriptionSolo" type="service" id=".service_locator.4oNQG9h"/>
         <argument key="App\Controller\Admin\AdminController:affUser" type="service" id=".service_locator.RTUGCCW"/>
         <argument key="App\Controller\Admin\AdminController:ajouterCategorie" type="service" id=".service_locator.O30o4K4"/>
+        <argument key="App\Controller\Admin\AdminController:deleteGroup" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController:deleteInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController:deleteUser" type="service" id=".service_locator.dNCO0Nf"/>
+        <argument key="App\Controller\Admin\AdminController:editGroupe" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController:editInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController:editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\CategorieController:delete" type="service" id=".service_locator.57pSehj"/>
@@ -5599,10 +5655,16 @@
         <argument key="App\Controller\ResetPasswordController:request" type="service" id=".service_locator.A0rcl1e"/>
         <argument key="App\Controller\ResetPasswordController:reset" type="service" id=".service_locator.j5_bHjD"/>
         <argument key="App\Controller\SecurityController:login" type="service" id=".service_locator.xA8Fw_."/>
+        <argument key="App\Controller\User\UserController:createGroup" type="service" id=".service_locator.fGAMVDj"/>
+        <argument key="App\Controller\User\UserController:deleteGroup" type="service" id=".service_locator.1ScvF58"/>
+        <argument key="App\Controller\User\UserController:deleteInscriptionGroupe" type="service" id=".service_locator.q0UdWW5"/>
         <argument key="App\Controller\User\UserController:deleteInscriptionSolo" type="service" id=".service_locator.2wd8YtR"/>
         <argument key="App\Controller\User\UserController:editUser" type="service" id=".service_locator.dNCO0Nf"/>
         <argument key="App\Controller\User\UserController:getInfosUser" type="service" id=".service_locator.fw6ySEy"/>
+        <argument key="App\Controller\User\UserController:infoGroupe" type="service" id=".service_locator.fGAMVDj"/>
+        <argument key="App\Controller\User\UserController:infosInscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController:infosInscriptionSolo" type="service" id=".service_locator.WX7skS."/>
+        <argument key="App\Controller\User\UserController:inscriptionGroupe" type="service" id=".service_locator.MXxBuTq"/>
         <argument key="App\Controller\User\UserController:inscriptionSolo" type="service" id=".service_locator.WX7skS."/>
         <argument key="kernel:loadRoutes" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="kernel:registerContainerConfiguration" type="service" id=".service_locator.C9JCBPC"/>
@@ -5668,12 +5730,14 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.WrgfcBP" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.SfmKVmu" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CategorieType" type="service" id="App\Form\CategorieType"/>
         <argument key="App\Form\ChangePasswordFormType" type="service" id="App\Form\ChangePasswordFormType"/>
         <argument key="App\Form\EditAccountUserFormType" type="service" id="App\Form\EditAccountUserFormType"/>
+        <argument key="App\Form\GroupFormType" type="service" id="App\Form\GroupFormType"/>
+        <argument key="App\Form\InscriptionGroupFormType" type="service" id="App\Form\InscriptionGroupFormType"/>
         <argument key="App\Form\InscriptionSoloFormType" type="service" id="App\Form\InscriptionSoloFormType"/>
         <argument key="App\Form\InscriptionSoloType" type="service" id="App\Form\InscriptionSoloType"/>
         <argument key="App\Form\RegistrationFormType" type="service" id="App\Form\RegistrationFormType"/>
@@ -6110,12 +6174,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.q98HjwH"/>
+      <argument type="service" id=".service_locator.2dpdVYX"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.q98HjwH"/>
+      <argument type="service" id=".service_locator.2dpdVYX"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -6128,9 +6192,11 @@
     <service id=".errored..service_locator.beq5mCo.Symfony\Component\HttpFoundation\Response" class="Symfony\Component\HttpFoundation\Response"/>
     <service id=".errored..service_locator.C9JCBPC.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
     <service id=".errored..service_locator.4MW7.KG.App\Entity\InscriptionSolo" class="App\Entity\InscriptionSolo"/>
+    <service id=".errored..service_locator.1ScvF58.App\Entity\Group" class="App\Entity\Group"/>
     <service id=".errored..service_locator.57pSehj.App\Entity\Categorie" class="App\Entity\Categorie"/>
     <service id=".errored..service_locator.0l1nthY.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.2wd8YtR.App\Entity\InscriptionSolo" class="App\Entity\InscriptionSolo"/>
+    <service id=".errored..service_locator.q0UdWW5.App\Entity\InscriptionGroup" class="App\Entity\InscriptionGroup"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
       <argument type="service" id=".service_locator.BzL8.fh"/>
@@ -6522,7 +6588,7 @@
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.WaGDpDt" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.q98HjwH"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.2dpdVYX"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

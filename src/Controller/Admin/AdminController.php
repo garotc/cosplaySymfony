@@ -3,10 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Group;
 use App\Entity\Categorie;
+use App\Form\GroupFormType;
 use App\Entity\InscriptionSolo;
 use App\Form\CategorieFormType;
 use App\Repository\UserRepository;
+use App\Repository\GroupRepository;
 use App\Form\EditAccountUserFormType;
 use App\Form\InscriptionSoloFormType;
 use App\Repository\CategorieRepository;
@@ -28,7 +31,7 @@ class AdminController extends AbstractController
             'controller_name' => 'AdminController',
         ]);
     }
-
+//--------------------------------GESTION DES CATEGORIES--------------------------------//
 
     /**
      * @Route("/admin/categorie/ajout", name="categorie_ajout")
@@ -49,7 +52,7 @@ class AdminController extends AbstractController
 
        return $this->render('admin/ajoutCategorie.html.twig',['formCategorie'=>$form->createView()]);
     }
-
+//--------------------------------GESTION USER--------------------------------//
     /**
      * @Route("/admin/users", name="admin_aff_user")
      */
@@ -63,7 +66,6 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/user/{id}", name="admin_user_edit")
      */
-
      public function editUser(User $user=null, Request $request, EntityManagerInterface $em) : Response
      {
          $modif = $user->getId() !==null;
@@ -98,7 +100,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_aff_user');
         }
     }
-
+//--------------------------------INSCRIPTIONS SOLO--------------------------------//
     /**
      * @Route("/admin/inscription/solo", name="admin_aff_inscription_solo")
      */
@@ -109,7 +111,6 @@ class AdminController extends AbstractController
    /*      dd($inscriptionsSolo); */
         return $this->render('admin/inscriptionSolo.html.twig', compact('inscriptionsSolo','inscription'));
     }
-
 
     /**
      * @Route("admin/inscription/solo/{id}/edit", name="admin_inscription_solo_edit", methods={"GET","POST"})
@@ -144,5 +145,48 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_aff_inscription_solo');
     }
+//--------------------------------GESTION GROUPE--------------------------------//
+    /**
+     * @Route("/admin/groupe", name="admin_aff_groupe")
+     */
+    public function affGroup(GroupRepository $repo): Response
+    {
+        $creation = $this->getUser();
+        $group = $repo->findAll();
+        //dd($inscriptionsSolo); 
+        return $this->render('admin/group.html.twig', compact('creation','group'));
+    }
+    /**
+     * @Route("admin/group/{id}/edit", name="admin_groupe_edit", methods={"GET","POST"})
+     */
+    public function editGroupe(Request $request, Group $group): Response
+    {
+        $form = $this->createForm(GroupFormType::class, $group);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_aff_groupe');
+        }
+
+        return $this->render('admin/editGroup.html.twig', [
+            'group' => $group,
+            'editgroupform' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("admin/group/{id}/delete", name="admin_groupe_delete", methods="SUPGROUP")
+     */
+    public function deleteGroup(Request $request, Group $group): Response
+    {
+        if ($this->isCsrfTokenValid('SUPGROUP'.$group->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($group);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_aff_groupe');
+    }
+//--------------------------------INSCRIPTIONS GROUPE--------------------------------//
 }

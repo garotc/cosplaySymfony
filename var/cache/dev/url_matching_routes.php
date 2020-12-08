@@ -17,6 +17,7 @@ return [
         '/admin/categorie/ajout' => [[['_route' => 'categorie_ajout', '_controller' => 'App\\Controller\\Admin\\AdminController::ajouterCategorie'], null, null, null, false, false, null]],
         '/admin/users' => [[['_route' => 'admin_aff_user', '_controller' => 'App\\Controller\\Admin\\AdminController::affUser'], null, null, null, false, false, null]],
         '/admin/inscription/solo' => [[['_route' => 'admin_aff_inscription_solo', '_controller' => 'App\\Controller\\Admin\\AdminController::affInscriptionSolo'], null, null, null, false, false, null]],
+        '/admin/groupe' => [[['_route' => 'admin_aff_groupe', '_controller' => 'App\\Controller\\Admin\\AdminController::affGroup'], null, null, null, false, false, null]],
         '/admin/categorie/admin/categorie' => [[['_route' => 'categorie_index', '_controller' => 'App\\Controller\\CategorieController::index'], null, ['GET' => 0], null, false, false, null]],
         '/admin/categorieadmin/ajouter-categorie' => [[['_route' => 'categorie_new', '_controller' => 'App\\Controller\\CategorieController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/' => [[['_route' => 'accueil', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
@@ -32,6 +33,12 @@ return [
         '/profile/inscription/solo' => [[['_route' => 'inscription_solo', '_controller' => 'App\\Controller\\User\\UserController::infosInscriptionSolo'], null, null, null, false, false, null]],
         '/profile/inscription/solo/edit' => [[['_route' => 'inscription_solo_edit', '_controller' => 'App\\Controller\\User\\UserController::inscriptionSolo'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/profile/inscription/solo/minscrire' => [[['_route' => 'inscription_solo_ajout', '_controller' => 'App\\Controller\\User\\UserController::inscriptionSolo'], null, null, null, false, false, null]],
+        '/profile/groupe' => [[['_route' => 'groupe', '_controller' => 'App\\Controller\\User\\UserController::infoGroupe'], null, null, null, false, false, null]],
+        '/profile/creation-groupe/edit' => [[['_route' => 'creation_groupe_edit', '_controller' => 'App\\Controller\\User\\UserController::createGroup'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/profile/creation-groupe/creer' => [[['_route' => 'creation_groupe_ajout', '_controller' => 'App\\Controller\\User\\UserController::createGroup'], null, null, null, false, false, null]],
+        '/profile/inscription/groupe' => [[['_route' => 'inscription_groupe', '_controller' => 'App\\Controller\\User\\UserController::infosInscriptionGroupe'], null, null, null, false, false, null]],
+        '/profile/inscription/groupe/edit' => [[['_route' => 'inscription_groupe_edit', '_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/profile/inscription/groupe/minscrire' => [[['_route' => 'inscription_groupe_ajout', '_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -59,14 +66,23 @@ return [
                         .'|edit(*:249)'
                         .'|delete(*:263)'
                     .')'
+                    .'|group/([^/]++)/(?'
+                        .'|edit(*:294)'
+                        .'|delete(*:308)'
+                    .')'
                     .'|categorieadmin/categorie/([^/]++)(?'
-                        .'|(*:308)'
-                        .'|/edit(*:321)'
-                        .'|(*:329)'
+                        .'|(*:353)'
+                        .'|/edit(*:366)'
+                        .'|(*:374)'
                     .')'
                 .')'
-                .'|/reset\\-password/reset(?:/([^/]++))?(*:375)'
-                .'|/profile/inscription/solo/([^/]++)/delete(*:424)'
+                .'|/reset\\-password/reset(?:/([^/]++))?(*:420)'
+                .'|/profile/(?'
+                    .'|inscription/solo/([^/]++)/delete(*:472)'
+                    .'|groupe/([^/]++)/delete(?'
+                        .'|(*:505)'
+                    .')'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -81,12 +97,16 @@ return [
         207 => [[['_route' => 'admin_user_delete', '_controller' => 'App\\Controller\\Admin\\AdminController::deleteUser'], ['id'], ['SUP' => 0], null, false, false, null]],
         249 => [[['_route' => 'admin_inscription_solo_edit', '_controller' => 'App\\Controller\\Admin\\AdminController::editInscriptionSolo'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         263 => [[['_route' => 'admin_inscription_solo_delete', '_controller' => 'App\\Controller\\Admin\\AdminController::deleteInscriptionSolo'], ['id'], ['SUPSOLO' => 0], null, false, false, null]],
-        308 => [[['_route' => 'categorie_show', '_controller' => 'App\\Controller\\CategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        321 => [[['_route' => 'categorie_edit', '_controller' => 'App\\Controller\\CategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        329 => [[['_route' => 'categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        375 => [[['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null]],
-        424 => [
-            [['_route' => 'inscription_solo_delete', '_controller' => 'App\\Controller\\User\\UserController::deleteInscriptionSolo'], ['id'], ['SUPUSERSOLO' => 0], null, false, false, null],
+        294 => [[['_route' => 'admin_groupe_edit', '_controller' => 'App\\Controller\\Admin\\AdminController::editGroupe'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        308 => [[['_route' => 'admin_groupe_delete', '_controller' => 'App\\Controller\\Admin\\AdminController::deleteGroup'], ['id'], ['SUPGROUP' => 0], null, false, false, null]],
+        353 => [[['_route' => 'categorie_show', '_controller' => 'App\\Controller\\CategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        366 => [[['_route' => 'categorie_edit', '_controller' => 'App\\Controller\\CategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        374 => [[['_route' => 'categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        420 => [[['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null]],
+        472 => [[['_route' => 'inscription_solo_delete', '_controller' => 'App\\Controller\\User\\UserController::deleteInscriptionSolo'], ['id'], ['SUPUSERSOLO' => 0], null, false, false, null]],
+        505 => [
+            [['_route' => 'groupe_delete', '_controller' => 'App\\Controller\\User\\UserController::deleteGroup'], ['id'], ['SUPGROUP' => 0], null, false, false, null],
+            [['_route' => 'inscription_groupe_delete', '_controller' => 'App\\Controller\\User\\UserController::deleteInscriptionGroupe'], ['id'], ['SUPINSCRIGROUP' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
