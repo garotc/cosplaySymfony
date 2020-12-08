@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\InscriptionSolo;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Mapping\Annotation\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -79,7 +80,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\InscriptionSolo", mappedBy="user")
+     * @ORM\OneToOne(targetEntity=InscriptionSolo::class, mappedBy="user")
      */
     private $inscriptionSolo;
 
@@ -93,10 +94,10 @@ class User implements UserInterface
      */
     private $inscriptionGroup;
 
-    public function __construct()
+/*     public function __construct()
     {
         $this->inscriptionSolo = new ArrayCollection();
-    }
+    } */
 
     public function getId(): ?int
     {
