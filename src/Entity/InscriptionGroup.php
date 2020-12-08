@@ -18,7 +18,7 @@ class InscriptionGroup
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="inscriptionGroup", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="inscriptionGroup")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

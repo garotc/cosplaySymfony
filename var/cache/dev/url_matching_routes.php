@@ -74,7 +74,9 @@ return [
                 .'|/reset\\-password/reset(?:/([^/]++))?(*:375)'
                 .'|/profile/(?'
                     .'|inscription/solo/([^/]++)/delete(*:427)'
-                    .'|groupe/([^/]++)/delete(*:457)'
+                    .'|groupe/([^/]++)/delete(?'
+                        .'|(*:460)'
+                    .')'
                 .')'
             .')/?$}sDu',
     ],
@@ -95,8 +97,9 @@ return [
         329 => [[['_route' => 'categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
         375 => [[['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null]],
         427 => [[['_route' => 'inscription_solo_delete', '_controller' => 'App\\Controller\\User\\UserController::deleteInscriptionSolo'], ['id'], ['SUPUSERSOLO' => 0], null, false, false, null]],
-        457 => [
+        460 => [
             [['_route' => 'groupe_delete', '_controller' => 'App\\Controller\\User\\UserController::deleteGroup'], ['id'], ['SUPGROUP' => 0], null, false, false, null],
+            [['_route' => 'inscription_groupe_delete', '_controller' => 'App\\Controller\\User\\UserController::deleteInscriptionGroupe'], ['id'], ['SUPINSCRIGROUP' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

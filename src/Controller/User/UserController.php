@@ -58,6 +58,7 @@ class UserController extends AbstractController
 
         return $this->render('home/user/editCompte.html.twig', ['userForm'=> $form->createView()]);
     }
+//--------------------------------INSCRIPTIONS SOLO--------------------------------//
 
     /**
      * @Route("profile/inscription/solo/{id}/delete", name="inscription_solo_delete", methods="SUPUSERSOLO")
@@ -73,7 +74,6 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('inscription_solo');
     }
-
 
     /**
      * @Route("profile/inscription/solo", name="inscription_solo"))
@@ -119,8 +119,7 @@ class UserController extends AbstractController
        return $this->render('home/user/editInscriptionSolo.html.twig',['formulaireSolo'=>$form->createView()]);
 
     }
-
-
+//--------------------------------CREATION DE GROUPE--------------------------------//
 
     /**
      * @Route("profile/groupe", name="groupe"))
@@ -180,8 +179,9 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('inscription_solo');
     }
+//--------------------------------INSCRIPTIONS MEMBRE GROUPE--------------------------------//
 
-        /**
+    /**
      * @Route("profile/inscription/groupe", name="inscription_groupe"))
      * 
      */
@@ -218,13 +218,24 @@ class UserController extends AbstractController
            $em->flush();
 
            $this->addFlash('message', $modif ? 'Inscription modifié avec succès' : 'Inscription effectuée avec succès');
-
            return $this->redirectToRoute('inscription_groupe');
        }
 
        return $this->render('home/user/editInscriptionGroup.html.twig',['formulaireMembreGroupe'=>$form->createView()]);
-
     }
+    /**
+     * @Route("profile/groupe/{id}/delete", name="inscription_groupe_delete", methods="SUPINSCRIGROUP")
+     */
+    public function deleteInscriptionGroupe(Request $request, InscriptionGroup $group): Response
+    {
 
+        if ($this->isCsrfTokenValid('SUPINSCRIGROUP'.$group->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($group);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('inscription_groupe');
+    }
     
 }

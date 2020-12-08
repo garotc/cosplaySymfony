@@ -29,10 +29,10 @@
         <div class="row mb-3">
             <a href="{{path('inscription_groupe_edit',{'id':infos.id})}}" class="btn btn-warning col-4 m-auto">Editer</a>
 
-            <form method="POST" class='col-4 m-auto btn' action="{{path('inscription_solo_delete',{'id':infos.id})}}"
+            <form method="POST" class='col-4 m-auto btn' action="{{path('inscription_groupe_delete',{'id':infos.id})}}"
                 onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
-                    <input type="hidden" name="_method" value="SUPUSERSOLO">
-                        <input type="hidden" name="_token" value="{{csrf_token('SUPUSERSOLO' ~ infos.id)}}">
+                    <input type="hidden" name="_method" value="SUPINSCRIGROUP">
+                        <input type="hidden" name="_token" value="{{csrf_token('SUPINSCRIGROUP' ~ infos.id)}}">
                                                 <input type="submit" class="btn btn-danger" value="Supprimer">
             </form>
 </div>

@@ -50,4 +50,5 @@ return [
     'inscription_groupe' => [[], ['_controller' => 'App\\Controller\\User\\UserController::infosInscriptionGroupe'], [], [['text', '/profile/inscription/groupe']], [], []],
     'inscription_groupe_edit' => [[], ['_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], [], [['text', '/profile/inscription/groupe/edit']], [], []],
     'inscription_groupe_ajout' => [[], ['_controller' => 'App\\Controller\\User\\UserController::inscriptionGroupe'], [], [['text', '/profile/inscription/groupe/minscrire']], [], []],
+    'inscription_groupe_delete' => [['id'], ['_controller' => 'App\\Controller\\User\\UserController::deleteInscriptionGroupe'], [], [['text', '/delete'], ['variable', '/', '[^/]++', 'id', true], ['text', '/profile/groupe']], [], []],
 ];
