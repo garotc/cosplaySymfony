@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer un compte{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
@@ -8,9 +8,9 @@
     {% endfor %}
 
 {{ form_start(registrationForm) }}
-<div class="form col-sm-12 col-md-6">
+<div class="form">
     <div class="row text-center p-sm-2">  
-        <h2 class="col-sm-12 col-md-6 mx-auto">Formulaire d'inscription</h2>
+        <h2 class="col-sm-12 col-md-6 mx-auto">Créer un compte</h2>
     </div>
 
     <div class="row">
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-sm-12 col-md-6 m-auto">
+        <div class="form-group col-sm-12 col-md-6 mx-auto pt-2">
 
             {{ form_widget(registrationForm.agreeTerms) }}
             {{ form_label(registrationForm.agreeTerms) }}
@@ -58,8 +58,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2 mx-auto mt-5">
-        {{ form_row(registrationForm.Enregistrer,{"attr":{class:'btn btn-primary'}})
+        <div class="col-sm-6 col-md-12 p-auto mt-4 m-auto">
+        {{ form_row(registrationForm.Enregistrer,{"attr":{class:'btn btn-dark'}})
         }}
         </div>        
     </div>

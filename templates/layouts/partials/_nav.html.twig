@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto row">
     {# Logo #}
-        <li class="nav-item active col-md-1 ml-md-0">
+        <li class="nav-item active p-2 col-md-1 ml-md-0 logo-cgs-nav-li">
             <a class="navbar-brand" href="{{path("accueil")}}">
                 <img src='{{ asset('img/logo-cgs.webp') }}' alt='logo carolo game show' class='logo-cgs-nav'>
             </a>
@@ -20,27 +20,22 @@
             <a class="nav-link" href="{{path("app_login")}}"><i class="far fa-user mr-1"></i>Connexion</a>
         </li>
 {% else %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{path('inscription_solo')}}">Inscription concours</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{path('inscription_groupe')}}">Inscription concours groupe</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{path('groupe')}}">Créer groupe</a>
-        </li>
-        
-        <li class="dropdown-menu nav-item" aria-labelledby="navbarDropdown">          
-          <a class="dropdown-item" href="{{path('inscription_solo')}}">Inscriptions solo</a>
-          <a class="dropdown-item" href="{{path('inscription_groupe')}}">Inscriptions groupe</a>
-          <a class="dropdown-item" href="{{path('groupe')}}">Ajouter un groupe</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link ml-auto" href="{{path('_app_user_account')}}">Mon compte</a>
-        </li>
-        <li class="nav-item ml-auto mr-5">
-            <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
-        </li>
+    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Inscriptions
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{{path('inscription_solo')}}">Inscription concours solo</a>
+            <a class="dropdown-item" href="{{path('inscription_groupe')}}">Inscription concours groupe</a>
+            <a class="dropdown-item" href="{{path('groupe')}}">Créer un groupe</a>
+            </div>
+    </li>    
+    <li class="nav-item">
+        <a class="nav-link ml-auto" href="{{path('_app_user_account')}}">Mon compte</a>
+    </li>
+    <li class="nav-item m-sm-auto ml-md-auto mr-md-5">
+        <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
+    </li>
 {% endif %}
     </ul>
 

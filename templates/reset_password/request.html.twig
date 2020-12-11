@@ -10,11 +10,12 @@
 
     {{ form_start(requestForm) }}
     <div class="form">
-    <div>
-        Entre ton adresse email avec laquelle tu t'es inscrit et nous allons t'envoyer un lien !
-    </div>
-        {{ form_row(requestForm.email) }}
-        <button class="btn btn-dark m-auto">Envoyer</button>
+        <div>
+            Entre tl'adresse email avec laquelle tu t'es inscrit et nous allons t'envoyer un lien !
+        </div>
+            {{ form_row(requestForm.email) }}
+            <button class="btn btn-dark m-auto">Envoyer</button>
+        </div>
     </div>
     {{ form_end(requestForm) }}
 {% endblock %}

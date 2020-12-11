@@ -23,7 +23,7 @@ class EditAccountUserFormType extends RegistrationFormType
         ->add('nom', TextType::class, ['label'=>'Nom'])
         ->add('prenom', TextType::class)
         ->add('telephone', TelType::class)
-        ->add('Modifier', SubmitType::class)
+        ->add('modifier', SubmitType::class)
     ;
     }
 

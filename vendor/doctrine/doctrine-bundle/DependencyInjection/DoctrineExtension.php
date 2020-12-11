@@ -2,7 +2,7 @@
 
 namespace Doctrine\Bundle\DoctrineBundle\DependencyInjection;
 
-use Doctrine\Bundle\DoctrineBundle\CacheWarmer\DoctrineMetadataCacheWarmer;
+use Doctrine\Bundle\DoctrineBundle\Command\Proxy\ImportDoctrineCommand;
 use Doctrine\Bundle\DoctrineBundle\Dbal\ManagerRegistryAwareConnectionProvider;
 use Doctrine\Bundle\DoctrineBundle\Dbal\RegexSchemaAssetFilter;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\ServiceRepositoryCompilerPass;
@@ -10,6 +10,9 @@ use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\DBAL\Connections\MasterSlaveConnection;
 use Doctrine\DBAL\Connections\PrimaryReadReplicaConnection;
+use Doctrine\DBAL\Logging\LoggerChain;
+use Doctrine\DBAL\SQLParserUtils;
+use Doctrine\DBAL\Tools\Console\Command\ImportCommand;
 use Doctrine\DBAL\Tools\Console\ConnectionProvider;
 use Doctrine\ORM\Proxy\Autoloader;
 use Doctrine\ORM\UnitOfWork;
@@ -22,8 +25,6 @@ use Symfony\Bridge\Doctrine\SchemaListener\MessengerTransportDoctrineSchemaSubsc
 use Symfony\Bridge\Doctrine\SchemaListener\PdoCacheAdapterDoctrineSchemaSubscriber;
 use Symfony\Bridge\Doctrine\Validator\DoctrineLoader;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
-use Symfony\Component\Cache\Adapter\DoctrineAdapter;
-use Symfony\Component\Cache\Adapter\PhpArrayAdapter;
 use Symfony\Component\Cache\DoctrineProvider;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
@@ -88,6 +89,19 @@ class DoctrineExtension extends AbstractDoctrineExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('dbal.xml');
+        $chainLogger = $container->getDefinition('doctrine.dbal.logger.chain');
+        $logger      = new Reference('doctrine.dbal.logger');
+        if (! method_exists(SQLParserUtils::class, 'getPositionalPlaceholderPositions') && method_exists(LoggerChain::class, 'addLogger')) {
+            // doctrine/dbal < 2.10.0
+            $chainLogger->addMethodCall('addLogger', [$logger]);
+        } else {
+            $chainLogger->addArgument([$logger]);
+        }
+
+        if (class_exists(ImportCommand::class)) {
+            $container->register('doctrine.database_import_command', ImportDoctrineCommand::class)
+                ->addTag('console.command', ['command' => 'doctrine:database:import']);
+        }
 
         if (empty($config['default_connection'])) {
             $keys                         = array_keys($config['connections']);
@@ -146,8 +160,16 @@ class DoctrineExtension extends AbstractDoctrineExtension
                 ->replaceArgument(1, $connection['profiling_collect_schema_errors']);
 
             if ($logger !== null) {
-                $chainLogger = new ChildDefinition('doctrine.dbal.logger.chain');
-                $chainLogger->addMethodCall('addLogger', [$profilingLogger]);
+                $chainLogger = $container->register(
+                    'doctrine.dbal.logger.chain',
+                    LoggerChain::class
+                );
+                if (! method_exists(SQLParserUtils::class, 'getPositionalPlaceholderPositions') && method_exists(LoggerChain::class, 'addLogger')) {
+                    // doctrine/dbal < 2.10.0
+                    $chainLogger->addMethodCall('addLogger', [$profilingLogger]);
+                } else {
+                    $chainLogger->addArgument([$logger, $profilingLogger]);
+                }
 
                 $loggerId = 'doctrine.dbal.logger.chain.' . $name;
                 $container->setDefinition($loggerId, $chainLogger);
@@ -268,6 +290,7 @@ class DoctrineExtension extends AbstractDoctrineExtension
         if (! empty($options['slaves']) || ! empty($options['replica'])) {
             $nonRewrittenKeys = [
                 'driver' => true,
+                'driverOptions' => true,
                 'driverClass' => true,
                 'wrapperClass' => true,
                 'keepSlave' => true,
@@ -816,12 +839,6 @@ class DoctrineExtension extends AbstractDoctrineExtension
         $this->loadCacheDriver('metadata_cache', $entityManager['name'], $entityManager['metadata_cache_driver'], $container);
         $this->loadCacheDriver('result_cache', $entityManager['name'], $entityManager['result_cache_driver'], $container);
         $this->loadCacheDriver('query_cache', $entityManager['name'], $entityManager['query_cache_driver'], $container);
-
-        if ($container->getParameter('kernel.debug')) {
-            return;
-        }
-
-        $this->registerMetadataPhpArrayCaching($entityManager['name'], $container);
     }
 
     /**
@@ -934,26 +951,5 @@ class DoctrineExtension extends AbstractDoctrineExtension
         $container->setDefinition($id, $poolDefinition);
 
         return $id;
-    }
-
-    private function registerMetadataPhpArrayCaching(string $entityManagerName, ContainerBuilder $container): void
-    {
-        $metadataCacheAlias              = $this->getObjectManagerElementName($entityManagerName . '_metadata_cache');
-        $decoratedMetadataCacheServiceId = (string) $container->getAlias($metadataCacheAlias);
-        $phpArrayCacheDecoratorServiceId = $decoratedMetadataCacheServiceId . '.php_array';
-        $phpArrayFile                    = '%kernel.cache_dir%' . sprintf('/doctrine/orm/%s_metadata.php', $entityManagerName);
-
-        $container->register(DoctrineMetadataCacheWarmer::class)
-            ->setArguments([new Reference(sprintf('doctrine.orm.%s_entity_manager', $entityManagerName)), $phpArrayFile])
-            ->addTag('kernel.cache_warmer');
-
-        $container->setAlias($metadataCacheAlias, $phpArrayCacheDecoratorServiceId);
-        $container->register($phpArrayCacheDecoratorServiceId, DoctrineProvider::class)
-            ->addArgument(
-                new Definition(PhpArrayAdapter::class, [
-                    $phpArrayFile,
-                    new Definition(DoctrineAdapter::class, [new Reference($decoratedMetadataCacheServiceId)]),
-                ])
-            );
     }
 }

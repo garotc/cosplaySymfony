@@ -4,51 +4,79 @@
 
 {% block body %}
 
-<section class='row p-auto'>
-{% for user in users %}
+{# Table #}
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                    <div class="card">
+                    <div class="card-header">
+                    <h4 class="card-title">
+                    Comptes utilisateurs
+                    </h4>
+                    </div>
+                    {# table header end #}
+                    <div class="card-body">
+                        <table id="tableUser" class="table table-bordered table-striped" >
+                        
+                            <thead>
+                                <tr>
+                                    <th>Email</td>
+                                    <th>Pseudo</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Téléphone</th>
+                                    <th>Date compte</th>
+                                    <th>Date modification</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
 
-    <div class="col-sm-12 col-md-3 affUser m-1 p-2">
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Pseudo : {{ user.pseudo }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Email : {{ user.email }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-6">Nom : {{ user.nom }}</div>
-            <div class="col-sm-12 col-md-6">Prénom : {{ user.prenom }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Téléphone : {{ user.telephone }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Compte créé le : {{ user.createdAt | date('d/m/Y',"Europe/Paris")}}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Compte édité pour la dernière fois le : {{ user.updatedAt | date('d/m/Y',"Europe/Paris")}}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">A créé un groupe : 
-            {% if user.createGroup == 1 %}
-                Oui
-            {% else %}
-                Non
-            {% endif %}</div>
-        </div>
-        <div class="row mb-3">
-            <a href="{{path('admin_user_edit',{'id':user.id})}}" class="btn btn-warning col-4 m-auto">Editer</a>
+                            <tbody>
+                            {# table libelle end #}
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.pseudo }}</td>
+                                    <td>{{ user.nom }}</td>
+                                    <td>{{ user.prenom }}</td>
+                                    <td>{{ user.telephone }}</td>
+                                    <td>{{ user.createdAt | date('d/m/Y',"Europe/Paris")}}</td>
+                                    <td>{{ user.updatedAt | date('d/m/Y',"Europe/Paris")}}</td>
 
-            {# Bouton delete #}
-            <form method="POST" class='col-4 m-auto btn' action="{{path('admin_user_delete',{'id':user.id})}}"
-            onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
-                <input type="hidden" name="_method" value="SUP">
-                <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ user.id)}}">
-                <input type="submit" class="btn btn-danger" value="Supprimer">
-            </form>
-        </div>
-    </div>
+                                    <td><a href="{{path('admin_user_edit',{'id':user.id})}}" class="btn btn-info  edit">Editer</a>
+                                    <form method="POST" class='col-sm-12 col-md-4 m-auto p-sm-0 btn form-sup' action="{{path('admin_user_delete',{'id':user.id})}}"
+                                    onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                                    <input type="hidden" name="_method" value="SUP">
+                                    <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ user.id)}}">
+                                    <input type="submit" class="btn btn-danger" value="Supprimer">
+                                    </form></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
 
-{% endfor %}
+                            <tfoot>
+                                <tr>
+                                    <th>Email</td>
+                                    <th>Pseudo</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Téléphone</th>
+                                    <th>Date compte</th>
+                                    <th>Date modification</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    {# card-body #}
+                    </div>
+                {# card #}
+                </div>
+            {# col-12 #}
+            </div>
+        {# row #}
+        </div>
 </section>
+
 
 {% endblock %}

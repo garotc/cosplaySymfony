@@ -72,12 +72,12 @@ class AdminController extends AbstractController
      public function editUser(User $user=null, Request $request, EntityManagerInterface $em) : Response
      {
          $modif = $user->getId() !==null;
-
+         $userId = $user->getId();
          $form = $this->createForm(EditAccountUserFormType::class, $user);
 
          $form->handleRequest($request);
          if($form->isSubmitted() && $form->isValid()){
-             
+            // dd($userId);
              $em->persist($user);
              $em->flush();
 
@@ -86,7 +86,7 @@ class AdminController extends AbstractController
             
          }
 
-         return $this->render('admin/editUserAccount.html.twig', ['userForm'=> $form->createView()]);
+         return $this->render('admin/editUserAccount.html.twig', ['userForm'=> $form->createView(), 'userId'=>$userId]);
      }
 
     /**

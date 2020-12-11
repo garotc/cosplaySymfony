@@ -20,6 +20,7 @@
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
       <parameter key="StofDoctrineExtensionsBundle">Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle</parameter>
       <parameter key="SymfonyCastsResetPasswordBundle">SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle</parameter>
+      <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -74,6 +75,10 @@
         <parameter key="path">C:\wamp64\www\test\cosplayProject\vendor\symfonycasts\reset-password-bundle\src</parameter>
         <parameter key="namespace">SymfonyCasts\Bundle\ResetPassword</parameter>
       </parameter>
+      <parameter key="VichUploaderBundle" type="collection">
+        <parameter key="path">C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle</parameter>
+        <parameter key="namespace">Vich\UploaderBundle</parameter>
+      </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
@@ -111,7 +116,7 @@
     <parameter key="kernel.secret">%env(APP_SECRET)%</parameter>
     <parameter key="kernel.http_method_override">true</parameter>
     <parameter key="kernel.trusted_hosts" type="collection"/>
-    <parameter key="kernel.default_locale">en</parameter>
+    <parameter key="kernel.default_locale">fr_FR</parameter>
     <parameter key="kernel.error_controller">error_controller</parameter>
     <parameter key="debug.file_link_format">null</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
@@ -224,6 +229,7 @@
       <parameter>main</parameter>
     </parameter>
     <parameter key="twig.form.resources" type="collection">
+      <parameter>@VichUploader/Form/fields.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
     <parameter key="twig.default_path">C:\wamp64\www\test\cosplayProject/templates</parameter>
@@ -262,6 +268,26 @@
     <parameter key="stof_doctrine_extensions.listener.softdeleteable.class">Gedmo\SoftDeleteable\SoftDeleteableListener</parameter>
     <parameter key="stof_doctrine_extensions.listener.uploadable.class">Gedmo\Uploadable\UploadableListener</parameter>
     <parameter key="stof_doctrine_extensions.listener.reference_integrity.class">Gedmo\ReferenceIntegrity\ReferenceIntegrityListener</parameter>
+    <parameter key="vich_uploader.default_filename_attribute_suffix">_name</parameter>
+    <parameter key="vich_uploader.mappings" type="collection">
+      <parameter key="inscriptions_images" type="collection">
+        <parameter key="uri_prefix">/img/uploads/inscriptions</parameter>
+        <parameter key="upload_destination">C:\wamp64\www\test\cosplayProject/public/img/uploads/inscriptions</parameter>
+        <parameter key="namer" type="collection">
+          <parameter key="service">Vich\UploaderBundle\Naming\SmartUniqueNamer.inscriptions_images</parameter>
+          <parameter key="options" type="collection"/>
+        </parameter>
+        <parameter key="directory_namer" type="collection">
+          <parameter key="service">null</parameter>
+          <parameter key="options">null</parameter>
+        </parameter>
+        <parameter key="delete_on_remove">true</parameter>
+        <parameter key="delete_on_update">true</parameter>
+        <parameter key="inject_on_load">false</parameter>
+        <parameter key="db_driver">orm</parameter>
+      </parameter>
+    </parameter>
+    <parameter key="vich_uploader.file_injector.class">Vich\UploaderBundle\Injector\FileInjector</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -334,6 +360,10 @@
       <parameter key="mailer.data_collector" type="collection">
         <parameter>mailer</parameter>
         <parameter>@WebProfiler/Collector/mailer.html.twig</parameter>
+      </parameter>
+      <parameter key="Vich\UploaderBundle\DataCollector\MappingCollector" type="collection">
+        <parameter>vich_uploader.mapping_collector</parameter>
+        <parameter>@VichUploader/Collector/mapping_collector.html.twig</parameter>
       </parameter>
       <parameter key="data_collector.config" type="collection">
         <parameter>config</parameter>
@@ -477,7 +507,7 @@
       <tag name="container.hot_path"/>
       <tag name="container.hot_path"/>
       <argument type="service" id="request_stack"/>
-      <argument>en</argument>
+      <argument>fr_FR</argument>
       <argument type="service" id="router.default" on-invalid="ignore"/>
     </service>
     <service id="validate_request_listener" class="Symfony\Component\HttpKernel\EventListener\ValidateRequestListener" public="false">
@@ -643,7 +673,7 @@
     </service>
     <service id="slugger" class="Symfony\Component\String\Slugger\AsciiSlugger" public="false">
       <tag name="kernel.locale_aware"/>
-      <argument>en</argument>
+      <argument>fr_FR</argument>
     </service>
     <service id="container.getenv" class="Closure" public="false">
       <tag name="routing.expression_language_function" function="env"/>
@@ -863,7 +893,7 @@
       <argument type="service" id="translation.writer"/>
       <argument type="service" id="translation.reader"/>
       <argument type="service" id="translation.extractor"/>
-      <argument>en</argument>
+      <argument>fr_FR</argument>
       <argument>C:\wamp64\www\test\cosplayProject/translations</argument>
       <argument>C:\wamp64\www\test\cosplayProject/templates</argument>
       <argument type="collection">
@@ -901,6 +931,7 @@
         <argument>Symfony\Component\Form\Extension\Core\Type</argument>
         <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
+        <argument>Vich\UploaderBundle\Form\Type</argument>
       </argument>
       <argument type="collection">
         <argument>App\Form\CategorieType</argument>
@@ -917,6 +948,8 @@
         <argument>Symfony\Component\Form\Extension\Core\Type\FileType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ColorType</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type\EntityType</argument>
+        <argument>Vich\UploaderBundle\Form\Type\VichFileType</argument>
+        <argument>Vich\UploaderBundle\Form\Type\VichImageType</argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension</argument>
@@ -1253,7 +1286,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.SfmKVmu"/>
+      <argument type="service" id=".service_locator.1SZgaz5"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -1606,7 +1639,7 @@
       <tag name="kernel.locale_aware"/>
       <argument type="service" id=".service_locator.6RweocE"/>
       <argument type="service" id="translator.formatter.default"/>
-      <argument>en</argument>
+      <argument>fr_FR</argument>
       <argument type="collection">
         <argument key="translation.loader.php" type="collection">
           <argument>php</argument>
@@ -1650,11 +1683,14 @@
         <argument key="resource_files" type="collection">
           <argument key="af" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.af.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.af.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.af.xlf</argument>
           </argument>
           <argument key="ar" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.ar.yaml</argument>
           </argument>
           <argument key="az" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.az.xlf</argument>
@@ -1670,20 +1706,24 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.bg.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.bg.yaml</argument>
           </argument>
           <argument key="bs" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.bs.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.bs.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.bs.xlf</argument>
           </argument>
           <argument key="ca" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.ca.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.ca.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.ca.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.ca.yaml</argument>
           </argument>
           <argument key="cs" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.cs.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.cs.yaml</argument>
           </argument>
           <argument key="cy" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.cy.xlf</argument>
@@ -1697,6 +1737,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.de.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.de.yaml</argument>
           </argument>
           <argument key="el" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
@@ -1707,11 +1748,13 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.en.yaml</argument>
           </argument>
           <argument key="es" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.es.yaml</argument>
           </argument>
           <argument key="et" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
@@ -1731,11 +1774,13 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.fi.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.fi.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.fi.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.fi.yaml</argument>
           </argument>
           <argument key="fr" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.fr.yaml</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
@@ -1756,6 +1801,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.hu.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.hu.yaml</argument>
           </argument>
           <argument key="hy" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.hy.xlf</argument>
@@ -1770,6 +1816,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.it.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.it.yaml</argument>
           </argument>
           <argument key="ja" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
@@ -1785,6 +1832,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.lt.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.lt.yaml</argument>
           </argument>
           <argument key="lv" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.lv.xlf</argument>
@@ -1794,6 +1842,7 @@
           <argument key="mn" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.mn.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.mn.xlf</argument>
           </argument>
           <argument key="nb" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.nb.xlf</argument>
@@ -1804,6 +1853,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.nl.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.nl.yaml</argument>
           </argument>
           <argument key="nn" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.nn.xlf</argument>
@@ -1819,10 +1869,13 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.pl.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.pl.yaml</argument>
           </argument>
           <argument key="pt" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.pt.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.pt.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.pt.yaml</argument>
           </argument>
           <argument key="pt_BR" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.pt_BR.xlf</argument>
@@ -1838,6 +1891,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.ru.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.ru.yaml</argument>
           </argument>
           <argument key="sk" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.sk.xlf</argument>
@@ -1848,6 +1902,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.sl.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.sl.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.sl.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.sl.yaml</argument>
           </argument>
           <argument key="sq" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.sq.xlf</argument>
@@ -1871,6 +1926,7 @@
           </argument>
           <argument key="th" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.th.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.th.xlf</argument>
           </argument>
           <argument key="tl" type="collection">
@@ -1882,11 +1938,13 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.tr.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.tr.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.tr.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.tr.yaml</argument>
           </argument>
           <argument key="uk" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.uk.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.uk.yaml</argument>
           </argument>
           <argument key="vi" type="collection">
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations\validators.vi.xlf</argument>
@@ -1903,14 +1961,15 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations\validators.zh_TW.xlf</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.zh_TW.xlf</argument>
           </argument>
-          <argument key="pt_PT" type="collection">
-            <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations\security.pt_PT.xlf</argument>
+          <argument key="vn" type="collection">
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations\messages.vn.yaml</argument>
           </argument>
         </argument>
         <argument key="scanned_directories" type="collection">
           <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations</argument>
           <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations</argument>
           <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations</argument>
+          <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations</argument>
           <argument>C:\wamp64\www\test\cosplayProject/translations</argument>
           <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\framework-bundle/translations</argument>
           <argument>C:\wamp64\www\test\cosplayProject\vendor\sensio\framework-extra-bundle\src/translations</argument>
@@ -1931,6 +1990,7 @@
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\validator/Resources/translations</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\form/Resources/translations</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\security-core/Resources/translations</argument>
+            <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/translations</argument>
             <argument>translations</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\framework-bundle/translations</argument>
             <argument>C:\wamp64\www\test\cosplayProject\vendor\sensio\framework-extra-bundle\src/translations</argument>
@@ -1954,7 +2014,7 @@
       </call>
       <call method="setFallbackLocales">
         <argument type="collection">
-          <argument>en</argument>
+          <argument>fr_FR</argument>
         </argument>
       </call>
     </service>
@@ -2210,6 +2270,9 @@
       </call>
       <call method="add">
         <argument type="service" id="mailer.data_collector"/>
+      </call>
+      <call method="add">
+        <argument type="service" id="Vich\UploaderBundle\DataCollector\MappingCollector"/>
       </call>
       <call method="add">
         <argument type="service" id="data_collector.config"/>
@@ -2917,7 +2980,7 @@
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="parameter_bag" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.router" on-invalid="ignore"/>
-      <argument>en</argument>
+      <argument>fr_FR</argument>
       <call method="setConfigCacheFactory">
         <argument type="service" id="config_cache_factory"/>
       </call>
@@ -3278,10 +3341,11 @@
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter">
       <argument type="service" id="argument_metadata_factory"/>
     </service>
-    <service id="doctrine.dbal.logger.chain" class="Doctrine\DBAL\Logging\LoggerChain" public="false" abstract="true">
-      <call method="addLogger">
+    <service id="doctrine.dbal.logger.chain" class="Doctrine\DBAL\Logging\LoggerChain">
+      <argument type="collection">
         <argument type="service" id="doctrine.dbal.logger"/>
-      </call>
+        <argument type="service" id="doctrine.dbal.logger.profiling.default"/>
+      </argument>
     </service>
     <service id="doctrine.dbal.logger.profiling" class="Doctrine\DBAL\Logging\DebugStack" public="false" abstract="true"/>
     <service id="doctrine.dbal.logger.backtrace" class="Doctrine\Bundle\DoctrineBundle\Dbal\Logging\BacktraceLogger" public="false" abstract="true"/>
@@ -3340,13 +3404,6 @@
         <argument>doctrine:database:drop</argument>
       </call>
     </service>
-    <service id="doctrine.database_import_command" class="Doctrine\Bundle\DoctrineBundle\Command\Proxy\ImportDoctrineCommand">
-      <tag name="console.command" command="doctrine:database:import"/>
-      <tag name="container.no_preload"/>
-      <call method="setName">
-        <argument>doctrine:database:import</argument>
-      </call>
-    </service>
     <service id="doctrine.query_sql_command" class="Doctrine\Bundle\DoctrineBundle\Command\Proxy\RunSqlDoctrineCommand">
       <tag name="console.command" command="doctrine:query:sql"/>
       <tag name="container.no_preload"/>
@@ -3362,22 +3419,30 @@
         <argument>dbal:run-sql</argument>
       </call>
     </service>
+    <service id="doctrine.database_import_command" class="Doctrine\Bundle\DoctrineBundle\Command\Proxy\ImportDoctrineCommand">
+      <tag name="console.command" command="doctrine:database:import"/>
+      <tag name="container.no_preload"/>
+      <call method="setName">
+        <argument>doctrine:database:import</argument>
+      </call>
+    </service>
     <service id="doctrine.dbal.default_connection.configuration" class="Doctrine\DBAL\Configuration" public="false">
       <call method="setSQLLogger">
         <argument type="service" id="doctrine.dbal.logger.chain.default"/>
       </call>
     </service>
     <service id="doctrine.dbal.logger.profiling.default" class="Doctrine\DBAL\Logging\DebugStack" public="false"/>
-    <service id="doctrine.dbal.logger.chain.default" class="Doctrine\DBAL\Logging\LoggerChain" public="false">
-      <call method="addLogger">
+    <service id="doctrine.dbal.logger.chain.default" class="Doctrine\DBAL\Logging\LoggerChain">
+      <argument type="collection">
         <argument type="service" id="doctrine.dbal.logger"/>
-      </call>
-      <call method="addLogger">
         <argument type="service" id="doctrine.dbal.logger.profiling.default"/>
-      </call>
+      </argument>
     </service>
     <service id="doctrine.dbal.default_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager" public="false">
       <argument type="service" id=".service_locator.xxFfgCP"/>
+      <call method="addEventSubscriber">
+        <argument type="service" id="vich_uploader.listener.clean.inscriptions_images"/>
+      </call>
       <call method="addEventSubscriber">
         <argument type="service" id="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber"/>
       </call>
@@ -3386,6 +3451,12 @@
       </call>
       <call method="addEventSubscriber">
         <argument type="service" id="stof_doctrine_extensions.listener.timestampable"/>
+      </call>
+      <call method="addEventSubscriber">
+        <argument type="service" id="vich_uploader.listener.remove.inscriptions_images"/>
+      </call>
+      <call method="addEventSubscriber">
+        <argument type="service" id="vich_uploader.listener.upload.inscriptions_images"/>
       </call>
       <call method="addEventListener">
         <argument type="collection">
@@ -3584,6 +3655,7 @@
       <call method="setEntityNamespaces">
         <argument type="collection">
           <argument key="App">App\Entity</argument>
+          <argument key="VichUploaderBundle">Vich\UploaderBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -3630,12 +3702,17 @@
       <argument type="service" id="annotations.cached_reader"/>
       <argument type="collection">
         <argument>C:\wamp64\www\test\cosplayProject\src\Entity</argument>
+        <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle\src\Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain" public="false">
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>App\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>Vich\UploaderBundle\Entity</argument>
       </call>
     </service>
     <service id="cache.doctrine.orm.default.metadata" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
@@ -4023,6 +4100,13 @@
         </argument>
         <argument>null</argument>
       </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.QWkwKV5"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
     </service>
     <service id="security.context_listener" class="Symfony\Component\Security\Http\Firewall\ContextListener" public="false">
       <tag name="monolog.logger" channel="security"/>
@@ -4235,6 +4319,7 @@
     <service id="security.authentication.manager" class="Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager" public="false">
       <argument type="iterator">
         <argument type="service" id="security.authentication.provider.guard.main"/>
+        <argument type="service" id="security.authentication.provider.rememberme.main"/>
         <argument type="service" id="security.authentication.provider.anonymous.main"/>
       </argument>
       <argument>true</argument>
@@ -4340,6 +4425,7 @@
       <argument>null</argument>
       <argument type="collection">
         <argument>guard</argument>
+        <argument>remember_me</argument>
         <argument>anonymous</argument>
       </argument>
       <argument>null</argument>
@@ -4364,6 +4450,14 @@
       <call method="addListener">
         <argument>Symfony\Component\Security\Http\Event\LogoutEvent</argument>
         <argument type="collection">
+          <argument type="service" id="security.logout.listener.remember_me.main"/>
+          <argument>onLogout</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\LogoutEvent</argument>
+        <argument type="collection">
           <argument type="service" id="security.logout.listener.csrf_token_clearing"/>
           <argument>onLogout</argument>
         </argument>
@@ -4371,6 +4465,7 @@
       </call>
     </service>
     <service id="security.context_listener.0" class="Symfony\Component\Security\Http\Firewall\ContextListener" public="false">
+      <tag name="security.remember_me_aware" id="main" provider="none"/>
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
         <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
@@ -4383,6 +4478,9 @@
         <argument type="service" id="security.token_storage"/>
         <argument>enableUsageTracking</argument>
       </argument>
+      <call method="setRememberMeServices">
+        <argument type="service" id="security.authentication.rememberme.services.simplehash.main"/>
+      </call>
     </service>
     <service id="security.logout_listener.main" class="Symfony\Component\Security\Http\Firewall\LogoutListener" public="false">
       <argument type="service" id="security.token_storage"/>
@@ -4422,6 +4520,46 @@
         <argument type="service" id="App\Security\ConnexionAuthenticator"/>
       </argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <call method="setRememberMeServices">
+        <argument type="service" id="security.authentication.rememberme.services.simplehash.main"/>
+      </call>
+    </service>
+    <service id="security.authentication.provider.rememberme.main" class="Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider" public="false">
+      <argument type="service" id="security.user_checker"/>
+      <argument>%env(APP_SECRET)%</argument>
+      <argument>main</argument>
+    </service>
+    <service id="security.authentication.rememberme.services.simplehash.main" class="Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices" public="false">
+      <argument type="iterator">
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
+      </argument>
+      <argument>%env(APP_SECRET)%</argument>
+      <argument>main</argument>
+      <argument type="collection">
+        <argument key="lifetime">604800</argument>
+        <argument key="path">/</argument>
+        <argument key="name">REMEMBERME</argument>
+        <argument key="domain">null</argument>
+        <argument key="secure">null</argument>
+        <argument key="httponly">true</argument>
+        <argument key="samesite">lax</argument>
+        <argument key="always_remember_me">false</argument>
+        <argument key="remember_me_parameter">_remember_me</argument>
+      </argument>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+    </service>
+    <service id="security.authentication.listener.rememberme.main" class="Symfony\Component\Security\Http\Firewall\RememberMeListener" public="false">
+      <argument type="service" id="security.untracked_token_storage"/>
+      <argument type="service" id="security.authentication.rememberme.services.simplehash.main"/>
+      <argument type="service" id="security.authentication.manager"/>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
+      <argument>true</argument>
+      <argument type="service" id="security.authentication.session_strategy"/>
+    </service>
+    <service id="security.logout.listener.remember_me.main" class="Symfony\Component\Security\Http\EventListener\RememberMeLogoutListener">
+      <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
+      <argument type="service" id="security.authentication.rememberme.services.simplehash.main"/>
     </service>
     <service id="security.authentication.listener.anonymous.main" class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
       <argument type="service" id="security.untracked_token_storage"/>
@@ -4448,6 +4586,7 @@
         <argument type="service" id="security.channel_listener"/>
         <argument type="service" id="security.context_listener.0"/>
         <argument type="service" id="security.authentication.listener.guard.main"/>
+        <argument type="service" id="security.authentication.listener.rememberme.main"/>
         <argument type="service" id="security.authentication.listener.anonymous.main"/>
         <argument type="service" id="security.access_listener"/>
       </argument>
@@ -4468,6 +4607,9 @@
     </service>
     <service id=".security.request_matcher.Pn7yvdV" class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
       <argument>^/profile</argument>
+    </service>
+    <service id=".security.request_matcher.QWkwKV5" class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+      <argument>^/login</argument>
     </service>
     <service id="security.command.user_password_encoder" class="Symfony\Bundle\SecurityBundle\Command\UserPasswordEncoderCommand" public="false">
       <tag name="console.command" command="security:encode-password"/>
@@ -4556,6 +4698,9 @@
       <call method="addExtension">
         <argument type="service" id="twig.extension.webprofiler"/>
       </call>
+      <call method="addExtension">
+        <argument type="service" id="Vich\UploaderBundle\Twig\Extension\UploaderExtension"/>
+      </call>
       <call method="addGlobal">
         <argument>app</argument>
         <argument type="service" id="twig.app_variable"/>
@@ -4640,6 +4785,14 @@
       <call method="addPath">
         <argument>C:\wamp64\www\test\cosplayProject\vendor\symfony\debug-bundle/Resources/views</argument>
         <argument>!Debug</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/templates</argument>
+        <argument>VichUploader</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp64\www\test\cosplayProject\vendor\vich\uploader-bundle/templates</argument>
+        <argument>!VichUploader</argument>
       </call>
       <call method="addPath">
         <argument>C:\wamp64\www\test\cosplayProject/templates</argument>
@@ -5028,6 +5181,7 @@
     <service id="maker.generator" class="Symfony\Bundle\MakerBundle\Generator" public="false">
       <argument type="service" id="maker.file_manager"/>
       <argument>App</argument>
+      <argument type="service" id="maker.php_compat_util"/>
     </service>
     <service id="maker.entity_class_generator" class="Symfony\Bundle\MakerBundle\Doctrine\EntityClassGenerator" public="false">
       <argument type="service" id="maker.generator"/>
@@ -5040,6 +5194,9 @@
     <service id="maker.security_config_updater" class="Symfony\Bundle\MakerBundle\Security\SecurityConfigUpdater" public="false"/>
     <service id="maker.renderer.form_type_renderer" class="Symfony\Bundle\MakerBundle\Renderer\FormTypeRenderer" public="false">
       <argument type="service" id="maker.generator"/>
+    </service>
+    <service id="maker.php_compat_util" class="Symfony\Bundle\MakerBundle\Util\PhpCompatUtil" public="false">
+      <argument type="service" id="maker.file_manager"/>
     </service>
     <service id="maker.maker.make_authenticator" class="Symfony\Bundle\MakerBundle\Maker\MakeAuthenticator" public="false">
       <tag name="maker.command"/>
@@ -5172,6 +5329,247 @@
       <argument type="service" id="App\Repository\ResetPasswordRequestRepository"/>
       <argument>3600</argument>
       <argument>3600</argument>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\SmartUniqueNamer.inscriptions_images" class="Vich\UploaderBundle\Naming\SmartUniqueNamer" public="true">
+      <argument type="service" id="Vich\UploaderBundle\Util\Transliterator"/>
+    </service>
+    <service id="vich_uploader.adapter.mongodb" class="Vich\UploaderBundle\Adapter\ODM\MongoDB\MongoDBAdapter" public="false"/>
+    <service id="vich_uploader.adapter.orm" class="Vich\UploaderBundle\Adapter\ORM\DoctrineORMAdapter" public="false"/>
+    <service id="vich_uploader.adapter.phpcr" class="Vich\UploaderBundle\Adapter\PHPCR\PHPCRAdapter" public="false"/>
+    <service id="vich_uploader.listener.doctrine.base" public="false" abstract="true">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.inject.orm" class="Vich\UploaderBundle\EventListener\Doctrine\InjectListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.orm" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.orm" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.orm" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.inject.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\InjectListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.inject.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\InjectListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.storage.file_system" class="Vich\UploaderBundle\Storage\FileSystemStorage" public="false">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+    </service>
+    <service id="vich_uploader.file_injector" class="Vich\UploaderBundle\Injector\FileInjector" public="false">
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+    </service>
+    <service id="vich_uploader.metadata.file_locator" class="Metadata\Driver\FileLocator" public="false">
+      <argument type="collection"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.annotation" class="Vich\UploaderBundle\Metadata\Driver\AnnotationDriver" public="false">
+      <argument type="service" id="annotations.cached_reader"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.xml" class="Vich\UploaderBundle\Metadata\Driver\XmlDriver" public="false">
+      <argument type="service" id="vich_uploader.metadata.file_locator"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.yaml" class="Vich\UploaderBundle\Metadata\Driver\YamlDriver" public="false">
+      <argument type="service" id="vich_uploader.metadata.file_locator"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.chain" class="Metadata\Driver\DriverChain" public="false">
+      <argument type="collection">
+        <argument type="service" id="vich_uploader.metadata_driver.xml"/>
+        <argument type="service" id="vich_uploader.metadata_driver.annotation"/>
+        <argument type="service" id="vich_uploader.metadata_driver.yaml"/>
+      </argument>
+    </service>
+    <service id="vich_uploader.metadata.cache.file_cache" class="Metadata\Cache\FileCache" public="false">
+      <argument>C:\wamp64\www\test\cosplayProject\var\cache\dev/vich_uploader</argument>
+    </service>
+    <service id="vich_uploader.metadata_factory" class="Metadata\MetadataFactory" public="false">
+      <argument type="service" id="vich_uploader.metadata_driver.chain"/>
+      <argument>Metadata\ClassHierarchyMetadata</argument>
+      <argument>true</argument>
+      <call method="setCache">
+        <argument type="service" id="vich_uploader.metadata.cache.file_cache" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="vich_uploader.metadata_reader" class="Vich\UploaderBundle\Metadata\MetadataReader" public="false">
+      <argument type="service" id="vich_uploader.metadata_factory"/>
+    </service>
+    <service id="Vich\UploaderBundle\Metadata\CacheWarmer" class="Vich\UploaderBundle\Metadata\CacheWarmer" public="false">
+      <tag name="kernel.cache_warmer"/>
+      <argument>C:\wamp64\www\test\cosplayProject\var\cache\dev/vich_uploader</argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+    </service>
+    <service id="vich_uploader.property_mapping_factory" class="Vich\UploaderBundle\Mapping\PropertyMappingFactory" public="false">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument>%vich_uploader.mappings%</argument>
+      <argument>_name</argument>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\UniqidNamer" class="Vich\UploaderBundle\Naming\UniqidNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\PropertyNamer" class="Vich\UploaderBundle\Naming\PropertyNamer" public="true">
+      <argument type="service" id="Vich\UploaderBundle\Util\Transliterator"/>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\OrignameNamer" class="Vich\UploaderBundle\Naming\OrignameNamer" public="true">
+      <argument type="service" id="Vich\UploaderBundle\Util\Transliterator"/>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\HashNamer" class="Vich\UploaderBundle\Naming\HashNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\Base64Namer" class="Vich\UploaderBundle\Naming\Base64Namer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\SubdirDirectoryNamer" class="Vich\UploaderBundle\Naming\SubdirDirectoryNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\PropertyDirectoryNamer" class="Vich\UploaderBundle\Naming\PropertyDirectoryNamer" public="true">
+      <argument type="service" id="property_accessor" on-invalid="null"/>
+      <argument type="service" id="Vich\UploaderBundle\Util\Transliterator"/>
+    </service>
+    <service id="vich_uploader.current_date_time_helper" class="Vich\UploaderBundle\Naming\CurrentDateTimeHelper" public="false"/>
+    <service id="Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer" class="Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer" public="true">
+      <argument type="service" id="vich_uploader.current_date_time_helper" on-invalid="null"/>
+      <argument type="service" id="property_accessor" on-invalid="null"/>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\SmartUniqueNamer" class="Vich\UploaderBundle\Naming\SmartUniqueNamer" public="true">
+      <argument type="service" id="Vich\UploaderBundle\Util\Transliterator"/>
+    </service>
+    <service id="Vich\UploaderBundle\Util\Transliterator" class="Vich\UploaderBundle\Util\Transliterator" public="false">
+      <argument type="service" id="slugger"/>
+    </service>
+    <service id="vich_uploader.download_handler" class="Vich\UploaderBundle\Handler\DownloadHandler" public="true">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+    </service>
+    <service id="vich_uploader.upload_handler" class="Vich\UploaderBundle\Handler\UploadHandler" public="true">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+      <argument type="service" id="vich_uploader.file_injector"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="vich_uploader.command.mapping_debug_class" class="Vich\UploaderBundle\Command\MappingDebugClassCommand" public="false">
+      <tag name="console.command" command="vich:mapping:debug-class"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <call method="setName">
+        <argument>vich:mapping:debug-class</argument>
+      </call>
+    </service>
+    <service id="vich_uploader.command.mapping_debug" class="Vich\UploaderBundle\Command\MappingDebugCommand" public="false">
+      <tag name="console.command" command="vich:mapping:debug"/>
+      <tag name="container.no_preload"/>
+      <argument>%vich_uploader.mappings%</argument>
+      <call method="setName">
+        <argument>vich:mapping:debug</argument>
+      </call>
+    </service>
+    <service id="vich_uploader.command.mapping_list_classes" class="Vich\UploaderBundle\Command\MappingListClassesCommand" public="false">
+      <tag name="console.command" command="vich:mapping:list-classes"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <call method="setName">
+        <argument>vich:mapping:list-classes</argument>
+      </call>
+    </service>
+    <service id="Vich\UploaderBundle\DataCollector\MappingCollector" class="Vich\UploaderBundle\DataCollector\MappingCollector" public="false">
+      <tag name="data_collector" template="@VichUploader/Collector/mapping_collector.html.twig" id="vich_uploader.mapping_collector"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+    </service>
+    <service id="vich_uploader.form.type.file" class="Vich\UploaderBundle\Form\Type\VichFileType" public="true">
+      <tag name="form.type" alias="vich_file"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="vich_uploader.form.type.image" class="Vich\UploaderBundle\Form\Type\VichImageType" public="true">
+      <tag name="form.type" alias="vich_image"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="property_accessor"/>
+      <argument>null</argument>
+    </service>
+    <service id="Vich\UploaderBundle\Templating\Helper\UploaderHelper" class="Vich\UploaderBundle\Templating\Helper\UploaderHelper" public="false">
+      <tag name="templating.helper" alias="vich_uploader"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+    </service>
+    <service id="Vich\UploaderBundle\Twig\Extension\UploaderExtension" class="Vich\UploaderBundle\Twig\Extension\UploaderExtension" public="false">
+      <tag name="twig.extension"/>
+      <argument type="service" id="Vich\UploaderBundle\Templating\Helper\UploaderHelper"/>
+    </service>
+    <service id="vich_uploader.listener.clean.inscriptions_images" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <tag name="doctrine.event_subscriber" priority="50"/>
+      <argument>inscriptions_images</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.inscriptions_images" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <tag name="doctrine.event_subscriber" priority="0"/>
+      <argument>inscriptions_images</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.inscriptions_images" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <tag name="doctrine.event_subscriber" priority="0"/>
+      <argument>inscriptions_images</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
     </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminController" class="App\Controller\Admin\AdminController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminController" class="App\Controller\Admin\AdminController" autowire="true" abstract="true"/>
@@ -5754,7 +6152,7 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.SfmKVmu" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.1SZgaz5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CategorieType" type="service" id="App\Form\CategorieType"/>
@@ -5771,6 +6169,8 @@
         <argument key="Symfony\Component\Form\Extension\Core\Type\ColorType" type="service" id="form.type.color"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FileType" type="service" id="form.type.file"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service" id="form.type.form"/>
+        <argument key="Vich\UploaderBundle\Form\Type\VichFileType" type="service" id="vich_uploader.form.type.file"/>
+        <argument key="Vich\UploaderBundle\Form\Type\VichImageType" type="service" id="vich_uploader.form.type.image"/>
       </argument>
     </service>
     <service id=".debug.http_client" class="Symfony\Component\HttpClient\TraceableHttpClient">
@@ -6225,7 +6625,7 @@
     <service id=".errored..service_locator.q0UdWW5.App\Entity\InscriptionGroup" class="App\Entity\InscriptionGroup"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.BzL8.fh"/>
+      <argument type="service" id=".service_locator._YaDQgT"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -6256,9 +6656,9 @@
         <argument key="secrets:encrypt-from-local">console.command.secrets_encrypt_from_local</argument>
         <argument key="doctrine:database:create">doctrine.database_create_command</argument>
         <argument key="doctrine:database:drop">doctrine.database_drop_command</argument>
-        <argument key="doctrine:database:import">doctrine.database_import_command</argument>
         <argument key="doctrine:query:sql">doctrine.query_sql_command</argument>
         <argument key="dbal:run-sql">Doctrine\DBAL\Tools\Console\Command\RunSqlCommand</argument>
+        <argument key="doctrine:database:import">doctrine.database_import_command</argument>
         <argument key="doctrine:cache:clear-metadata">doctrine.cache_clear_metadata_command</argument>
         <argument key="doctrine:cache:clear-query">doctrine.cache_clear_query_cache_command</argument>
         <argument key="doctrine:cache:clear-result">doctrine.cache_clear_result_command</argument>
@@ -6293,6 +6693,9 @@
         <argument key="server:dump">var_dumper.command.server_dump</argument>
         <argument key="server:log">monolog.command.server_log</argument>
         <argument key="reset-password:remove-expired">SymfonyCasts\Bundle\ResetPassword\Command\ResetPasswordRemoveExpiredCommand</argument>
+        <argument key="vich:mapping:debug-class">vich_uploader.command.mapping_debug_class</argument>
+        <argument key="vich:mapping:debug">vich_uploader.command.mapping_debug</argument>
+        <argument key="vich:mapping:list-classes">vich_uploader.command.mapping_list_classes</argument>
         <argument key="make:auth">maker.auto_command.make_auth</argument>
         <argument key="make:command">maker.auto_command.make_command</argument>
         <argument key="make:controller">maker.auto_command.make_controller</argument>
@@ -6317,7 +6720,7 @@
         <argument key="make:migration">maker.auto_command.make_migration</argument>
       </argument>
     </service>
-    <service id=".service_locator.BzL8.fh" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator._YaDQgT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Doctrine\DBAL\Tools\Console\Command\RunSqlCommand" type="service" id="Doctrine\DBAL\Tools\Console\Command\RunSqlCommand"/>
@@ -6408,6 +6811,9 @@
         <argument key="twig.command.debug" type="service" id="twig.command.debug"/>
         <argument key="twig.command.lint" type="service" id="twig.command.lint"/>
         <argument key="var_dumper.command.server_dump" type="service" id="var_dumper.command.server_dump"/>
+        <argument key="vich_uploader.command.mapping_debug" type="service" id="vich_uploader.command.mapping_debug"/>
+        <argument key="vich_uploader.command.mapping_debug_class" type="service" id="vich_uploader.command.mapping_debug_class"/>
+        <argument key="vich_uploader.command.mapping_list_classes" type="service" id="vich_uploader.command.mapping_list_classes"/>
       </argument>
     </service>
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="false">
@@ -6570,6 +6976,8 @@
     <service id="Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface" alias="property_info" public="false"/>
     <service id="Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface" alias="property_info.reflection_extractor" public="false"/>
     <service id="Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface" alias="property_info.reflection_extractor" public="false"/>
+    <service id="Symfony\Component\Mime\MimeTypesInterface" alias="mime_types" public="false"/>
+    <service id="Symfony\Component\Mime\MimeTypeGuesserInterface" alias="mime_types" public="false"/>
     <service id="sensio_framework_extra.converter.doctrine.orm.expression_language" alias="sensio_framework_extra.converter.doctrine.orm.expression_language.default" public="false"/>
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default" public="false"/>
     <service id="Doctrine\DBAL\Driver\Connection" alias="doctrine.dbal.default_connection" public="false"/>
@@ -6612,6 +7020,25 @@
     <service id="logger" alias="monolog.logger"/>
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger" public="false"/>
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
+    <service id="vich_uploader.storage" alias="vich_uploader.storage.file_system"/>
+    <service id="Vich\UploaderBundle\Storage\StorageInterface" alias="vich_uploader.storage.file_system" public="false"/>
+    <service id="Vich\UploaderBundle\Storage\FileSystemStorage" alias="vich_uploader.storage.file_system" public="false"/>
+    <service id="vich_uploader.metadata_driver" alias="vich_uploader.metadata_driver.chain" public="false"/>
+    <service id="vich_uploader.metadata.cache" alias="vich_uploader.metadata.cache.file_cache" public="false"/>
+    <service id="Vich\UploaderBundle\Mapping\PropertyMappingFactory" alias="vich_uploader.property_mapping_factory" public="false"/>
+    <service id="vich_uploader.namer_uniqid" alias="Vich\UploaderBundle\Naming\UniqidNamer" public="true"/>
+    <service id="vich_uploader.namer_property" alias="Vich\UploaderBundle\Naming\PropertyNamer" public="true"/>
+    <service id="vich_uploader.namer_origname" alias="Vich\UploaderBundle\Naming\OrignameNamer" public="true"/>
+    <service id="vich_uploader.namer_hash" alias="Vich\UploaderBundle\Naming\HashNamer" public="true"/>
+    <service id="vich_uploader.namer_base64" alias="Vich\UploaderBundle\Naming\Base64Namer" public="true"/>
+    <service id="vich_uploader.directory_namer_subdir" alias="Vich\UploaderBundle\Naming\SubdirDirectoryNamer" public="true"/>
+    <service id="vich_uploader.namer_directory_property" alias="Vich\UploaderBundle\Naming\PropertyDirectoryNamer" public="true"/>
+    <service id="vich_uploader.namer_directory_current_date_time" alias="Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer" public="true"/>
+    <service id="vich_uploader.namer_smart_unique" alias="Vich\UploaderBundle\Naming\SmartUniqueNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Handler\DownloadHandler" alias="vich_uploader.download_handler" public="false"/>
+    <service id="Vich\UploaderBundle\Handler\UploadHandler" alias="vich_uploader.upload_handler" public="false"/>
+    <service id="Vich\UploaderBundle\Form\Type\VichFileType" alias="vich_uploader.form.type.file" public="false"/>
+    <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image" public="false"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.WaGDpDt" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="argument_resolver.controller_locator" alias=".service_locator.vYyNli0"/>

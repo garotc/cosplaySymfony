@@ -3,12 +3,12 @@
 {% block title %}Insciption solo{% endblock %}
 
 {% block body %}
-<h1>Inscriptions au concours solo</h1>
+<h1 class="">Inscriptions au concours solo</h1>
 
 <section class='row p-auto'>
 {% for inscription in inscriptionsSolo %}
 
-    <div class="col-sm-12 col-md-3 affUser m-1 p-2">
+    <div class="col-sm-12 col-md-3 affUser m-1 p-2 ">
         <div class="row py-1">
             <div class="col-sm-12 col-md-12">Pseudo : {{ inscription.user.pseudo }}</div>
         </div>
@@ -71,12 +71,13 @@
             <div class="col-sm-12 col-md-12">Autres informations : {{ inscription.InfosSolo }}</div>
         </div>
         <div class="row mb-3">
-                       <a href="{{path('admin_inscription_solo_edit',{'id':inscription.id})}}" class="btn btn-warning col-4 m-auto">Editer</a>
-            <form method="POST" class='col-4 m-auto btn' action="{{path('admin_inscription_solo_delete',{'id':inscription.id})}}"
-                                                onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
-                                                <input type="hidden" name="_method" value="SUPSOLO">
-                                                <input type="hidden" name="_token" value="{{csrf_token('SUPSOLO' ~ inscription.id)}}">
-                                                <input type="submit" class="btn btn-danger" value="Supprimer">
+            <a href="{{path('admin_inscription_solo_edit',{'id':inscription.id})}}" class="btn btn-info col-sm-12 col-md-4 m-auto edit">Editer</a>
+
+            <form method="POST" class='col-sm-12 col-md-4 m-auto p-sm-0 btn form-sup' action="{{path('admin_inscription_solo_delete',{'id':inscription.id})}}"
+            onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                <input type="hidden" name="_method" value="SUPSOLO">
+                <input type="hidden" name="_token" value="{{csrf_token('SUPSOLO' ~ inscription.id)}}">
+                <input type="submit" class="btn btn-danger m-0 col-12" value="Supprimer">
             </form>
         </div>
     </div>

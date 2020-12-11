@@ -24,28 +24,28 @@ class RegistrationFormType extends AbstractType
             ->add('pseudo', TextType::class, [
                 'constraints'=> [
                     new NotBlank([
-                        'message'=>'Ce champ ne peut être vide'
+                        'message'=>'Veuillez entrer votre pseudo (il pourra être changé plus tard)'
                     ])
                 ]
             ])
             ->add('nom', TextType::class, [
                 'constraints'=> [
                     new NotBlank([
-                        'message'=>'Ce champ ne peut être vide'
+                        'message'=>'Veuillez entrer votre nom'
                     ])
                 ]
             ])
             ->add('prenom', TextType::class, [
                 'constraints'=> [
                     new NotBlank([
-                        'message'=>'Ce champ ne peut être vide'
+                        'message'=>'Veuillez entrer votre prénom'
                     ])
                 ]
             ])
             ->add('telephone', TelType::class, [
                 'constraints'=> [
                     new NotBlank([
-                        'message'=>'Ce champ ne peut être vide'
+                        'message'=>'Veuillez entrer un numéro de téléphone'
                     ])
                 ]
             ])
@@ -75,7 +75,7 @@ class RegistrationFormType extends AbstractType
                 'label'=>'Accepter les CGU',
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Vous devez accepter les conditions d\'utilisations',
+                        'message' => 'Vous devez accepter les conditions générales d\'utilisations',
                     ]),
                 ],
             ])

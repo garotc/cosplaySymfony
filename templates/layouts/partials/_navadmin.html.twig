@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item active">
+      <li class="nav-item p-2 col-md-1 ml-md-0 logo-cgs-nav-li">
               <a class="navbar-brand" href="{{path("accueil")}}">
                 <img src='{{ asset('img/logo-cgs.webp') }}' alt='logo carolo game show' class='logo-cgs-nav'>
               </a>
@@ -16,19 +16,23 @@
         <li class="nav-item">
             <a class="nav-link" href="{{path('admin_aff_user')}}">Gestion des utilisateurs</a>
         </li>
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Inscriptions
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
-          <a class="dropdown-item" href="{{path('admin_aff_inscription_solo')}}">Inscriptions solo</a>
-          <a class="dropdown-item" href="{{path('admin_aff_inscription_groupe')}}">Inscriptions groupe</a>
-          <a class="dropdown-item" href="{{path('admin_aff_groupe')}}">Groupe créé</a>
-          <a class="dropdown-item" href="{{path('categorie_index')}}">Ajouter une catégorie</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
-      </li>
+
+    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Inscriptions
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{{path('admin_aff_inscription_solo')}}">Inscriptions concours solo</a>
+            <a class="dropdown-item" href="{{path('admin_aff_inscription_groupe')}}">Inscriptions concours groupe</a>
+            <a class="dropdown-item" href="{{path('admin_aff_groupe')}}">Groupes créés</a>
+            </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{path('categorie_index')}}">Ajouter une catégorie</a>
+    </li>
+    <li class="nav-item my-sm-auto mb-sm-3 ml-md-auto mr-md-5">
+      <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
+    </li>
 
     </ul>
   
