@@ -3,86 +3,108 @@
 {% block title %}Insciption solo{% endblock %}
 
 {% block body %}
-<h1 class="">Inscriptions au concours solo</h1>
 
-<section class='row p-auto'>
-{% for inscription in inscriptionsSolo %}
+{# Table #}
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                    <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                        Inscriptions au concours solo
+                        </h4>
+                    </div>
+                    {# table header end #}
+                    <div class="card-body table-responsive">
+                        <table id="tableUser" class="table table-bordered table-striped table-hover" >
+                        
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Utilisateur</td>
+                                    <th>Email</th>
+                                    <th>Nom du personnage</th>
+                                    <th>Categorie</th>
+                                    <th>Univers</th>
+                                    <th>Type de média</th>
+                                    <th>Lancement du média</th>
+                                    <th>Aide sur scène</th>
+                                    <th>Accessoires à déposer</th>
+                                    <th>Description des accessoires</th>
+                                    <th>Autres informations</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
 
-    <div class="col-sm-12 col-md-3 affUser m-1 p-2 ">
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Pseudo : {{ inscription.user.pseudo }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Email : {{ inscription.user.email }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-6">Nom : {{ inscription.user.nom }}</div>
-            <div class="col-sm-12 col-md-6">Prénom : {{ inscription.user.prenom }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Téléphone : {{ inscription.user.telephone }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Inscription effectuée le {{ inscription.createdAt | date('d M Y',"Europe/Paris")}}</div>
-        </div>
-        <hr></hr>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Nom du personnage : {{ inscription.NomPersoSolo }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Univers du personnage : {{ inscription.UniverSolo }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Type de média : {% if inscription.MediaSolo == 1 %}
+                            <tbody>
+                            {# table libelle end #}
+                                {% for inscription in inscriptionsSolo %}
+                                <tr>
+                                    <td>{{ inscription.user.pseudo }}</td>
+                                    <td>{{ inscription.user.email }}</td>
+                                    <td>{{ inscription.NomPersoSolo }}</td>
+                                    <td>{{ inscription.categorie.libelleCategorie }}</td>
+                                    <td>{{ inscription.UniverSolo }}</td>
+                                    <td>{% if inscription.MediaSolo == 1 %}
             Musique
             {% else %}
             Vidéo
-            {% endif %}
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Lancement du média : {% if inscription.envoiMediaSolo == 1 %}
+            {% endif %}</td>
+                                    <td>{% if inscription.envoiMediaSolo == 1 %}
             Avant l'entrée sur scène
             {% else %}
             Après l'entrée sur scène
-            {% endif %}
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Aide pour monter sur scène : {% if inscription.AideSolo == 1 %}
+            {% endif %}</td>
+                                    <td>{% if inscription.AideSolo == 1 %}
             Oui
             {% else %}
             Non
-            {% endif %}
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Accessoires à déposer sur scène : {% if inscription.AccessoireSolo == 1 %}
+            {% endif %}</td>
+                                    <td>{% if inscription.AccessoireSolo == 1 %}
             Oui
             {% else %}
             Non
-            {% endif %}
+            {% endif %}</td>
+                                    <td>{{ inscription.DescriptionAccessoireSolo }}</td>
+                                    <td>{{ inscription.InfosSolo }}</td>
+
+                                    <td><a href="{{path('admin_inscription_solo_edit',{'id':inscription.id})}}" class="btn btn-info edit">Editer</a>
+
+                                    <form method="POST" class='form-sup' action="{{path('admin_inscription_solo_delete',{'id':inscription.id})}}" onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                                        <input type="hidden" name="_method" value="SUPSOLO">
+                                        <input type="hidden" name="_token" value="{{csrf_token('SUPSOLO' ~ inscription.id)}}">
+                                        <input type="submit" class="btn btn-danger" value="Supprimer">
+                                    </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+
+                            <tfoot class="table-dark">
+                                <tr>
+                                    <th>Utilisateur</td>
+                                    <th>Email</th>
+                                    <th>Nom du personnage</th>
+                                    <th>Categorie</th>
+                                    <th>Univers</th>
+                                    <th>Type de média</th>
+                                    <th>Lancement du média</th>
+                                    <th>Aide sur scène</th>
+                                    <th>Accessoires à déposer</th>
+                                    <th>Description des accessoires</th>
+                                    <th>Autres informations</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    {# card-body #}
+                    </div>
+                {# card #}
+                </div>
+            {# col-12 #}
             </div>
+        {# row #}
         </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Déscription des accessoires : {{ inscription.DescriptionAccessoireSolo }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Autres informations : {{ inscription.InfosSolo }}</div>
-        </div>
-        <div class="row mb-3">
-            <a href="{{path('admin_inscription_solo_edit',{'id':inscription.id})}}" class="btn btn-info col-sm-12 col-md-4 m-auto edit">Editer</a>
-
-            <form method="POST" class='col-sm-12 col-md-4 m-auto p-sm-0 btn form-sup' action="{{path('admin_inscription_solo_delete',{'id':inscription.id})}}"
-            onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
-                <input type="hidden" name="_method" value="SUPSOLO">
-                <input type="hidden" name="_token" value="{{csrf_token('SUPSOLO' ~ inscription.id)}}">
-                <input type="submit" class="btn btn-danger m-0 col-12" value="Supprimer">
-            </form>
-        </div>
-    </div>
-
-{% endfor %}
 </section>
 
 {% endblock %}
