@@ -1,18 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Categorie{% endblock %}
+{% block title %}Modifier la catégorie{% endblock %}
 
 {% block body %}
-    <h1>Modifier Categorie</h1>
-<div class="col-6 m-auto">
-    <div class="row">
-        <div class='btn btn-dark'>{{ include('categorie/_form.html.twig', {'button_label': 'Modifier'}) }}</div>
-    </div>
-    
-    <div class="row">
-        <a href="{{ path('categorie_index') }}" class='btn btn-warning'>Retour</a>
 
-        <div class='btn btn-danger'>{{ include('categorie/_delete_form.html.twig') }}</div>
-    </div>
+<div class="col-4 m-auto newCatForm">
+    {{ include('categorie/_form.html.twig', {'button_label': 'Modifier'}) }}
 </div>
 {% endblock %}

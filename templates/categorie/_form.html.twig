@@ -1,4 +1,9 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+    <div class="form-row">
+        {{ form_widget(form) }}
+    </div>
+    <div class="form-row">
+    <button class="btn btn-primary m-auto col-sm-12 col-md-5">{{ button_label|default('Créer') }}</button>
+    <a href="{{ path('categorie_index') }}" class="btn btn-success m-auto col-sm-12 col-md-5">Retour</a>
+    </div>
 {{ form_end(form) }}

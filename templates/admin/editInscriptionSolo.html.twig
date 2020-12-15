@@ -4,10 +4,93 @@
 
 {% block body %}
 
-<div class="container justify-content-center">
-    <div class=" col-6 m-auto">
-        {{ form(editsoloform) }}
+    <div class="form col-sm-12 col-md-6 m-auto p-0">
+
+        {{ form_start(editsoloform,{"attr":{
+            class:" p-auto" }}) 
+        }}
+            <legend class="text-center">Modification de l'inscription solo</legend>
+
+            <div class="form-row mb-3 p-2">
+            <div class="col-12">
+            {{form_label(editsoloform.nomPersoSolo)}}</div>
+            {{form_widget(editsoloform.nomPersoSolo, {"attr":{
+                class:"form-control col-sm-12 col-md-6"
+            }})}}
+            </div>
+
+            <div class="form-row mb-3 p-2">
+                <div class="col-6">
+                {{form_label(editsoloform.univerSolo)}}
+                {{form_widget(editsoloform.univerSolo, {"attr":{
+                    class:"form-control"
+                }})}}
+                </div>
+                <div class="col-6">
+                {{form_label(editsoloform.categorie)}}
+                {{form_widget(editsoloform.categorie, {"attr":{
+                    class:"form-control"
+                }})}}
+                </div>
+            </div>
+
+            <div class="form-row mb-3 p-2">
+                <div class="col-6">
+                {{form_label(editsoloform.mediaSolo)}}
+                {{form_widget(editsoloform.mediaSolo, {"attr":{
+                    class:"form-control"
+                }})}}
+                </div>
+                <div class="col-6">
+                {{form_label(editsoloform.envoiMediaSolo)}}
+                {{form_widget(editsoloform.envoiMediaSolo, {"attr":{
+                    class:"form-control"
+                }})}}
+                </div>
+            </div>
+
+            <div class="form-row mb-3 p-2">
+                <div class="col-6">
+                {{form_label(editsoloform.aideSolo)}}
+                {{form_widget(editsoloform.aideSolo, {"attr":{
+                    class:"form-control col-sm-12"
+                }})}}
+                </div>
+            </div>
+
+            <div class="form-row mb-3 p-2">
+                <div class="col-6">
+                {{form_label(editsoloform.accessoireSolo)}}
+                {{form_widget(editsoloform.accessoireSolo, {"attr":{
+                    class:"form-control col-sm-12"
+                }})}}
+                </div>
+                <div class="col-6">
+                {{form_label(editsoloform.descriptionAccessoireSolo)}}
+                {{form_widget(editsoloform.descriptionAccessoireSolo, 
+                {"attr":{
+                    class:"form-control"
+                }})}}
+                </div>
+            </div>
+
+            <div class="form-row mb-3 p-2">
+                <div class="col-12">
+                {{form_label(editsoloform.infosSolo)}}
+                {{form_widget(editsoloform.infosSolo, {"attr":{
+                class:"form-control col-sm-12 col-md-6"
+                }})}}
+                </div>
+            </div>
+            <div class="form-row mb-3 p-2">
+            <div class="col-sm-12 col-md-4 m-auto">
+            {{ form_widget(editsoloform.Enregistrer,{"attr":{
+                class:'btn btn-dark form-control m-auto p-2'}})
+            }}</div>
+            </div>
+        {{ form_end(editsoloform) }}
     </div>
-</div>
+
+
 
 {% endblock %}

@@ -7,63 +7,38 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-{{ form_start(registrationForm) }}
-<div class="form">
-    <div class="row text-center p-sm-2">  
-        <h2 class="col-sm-12 col-md-6 mx-auto">Créer un compte</h2>
+<div class="row">
+
+{{ form_start(registrationForm, {"attr":{class:"col-sm-12 col-md-8 mt-md-5"}}) }}
+    <div class="text-center">  
+        <h2 class="">Créer un compte</h2>
     </div>
 
-    <div class="row">
-        <div class="form-group col-sm-12 col-md-6 m-auto">
-            {{ form_row(registrationForm.pseudo,{"attr":{ placeholder:'Pseudo',type:'text', class:'form-control'}})
-            }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-12 col-md-6 m-auto">
-            {{ form_row(registrationForm.nom,{"attr":{ placeholder:'Nom', type:'text', class:'form-control'}})
-            }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-12 col-md-6 m-auto">
-            {{ form_row(registrationForm.prenom,{"attr":{ placeholder:'Prénom', class:'form-control'}})
-            }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-12 col-md-6 m-auto">
+    {{ form_label(registrationForm.pseudo) }}
+    {{ form_widget(registrationForm.pseudo,{"attr":{ placeholder:'Pseudo', type:'text', class:'banane form-control'}}) }}
+ 
+    {{ form_label(registrationForm.nom) }}
+    {{ form_widget(registrationForm.nom,{"attr":{ placeholder:'Nom', type:'text', class:'form-control'}}) }}
+
+  {{ form_label(registrationForm.prenom) }}
+    {{ form_widget(registrationForm.prenom,{"attr":{ placeholder:'Prénom', class:'form-control'}}) }}
+
+
             {{ form_row(registrationForm.telephone,{"attr":{ placeholder:'numéro de téléphone',type : 'tel', class:'form-control'}})
             }}
-        </div>
-    </div> 
-    <div class="row">      
-        <div class="form-group col-sm-12 col-md-6 m-auto">
+
             {{ form_row(registrationForm.email,{"attr":{placeholder:'votre-email@email.fr',type:'email', class:'form-control'}})
             }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-12 col-md-6 m-auto">
+
             {{ form_row(registrationForm.plainPassword,{"attr":{placeholder:'●●●●●●●●',type:'password',class:'form-control'}})
             }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-12 col-md-6 mx-auto pt-2">
-
-            {{ form_widget(registrationForm.agreeTerms) }}
+<div class="form-check">
+            {{ form_widget(registrationForm.agreeTerms,{"attr":{class:'form-input-check'}}) }}
             {{ form_label(registrationForm.agreeTerms) }}
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 col-md-12 p-auto mt-4 m-auto">
-        {{ form_row(registrationForm.Enregistrer,{"attr":{class:'btn btn-dark'}})
-        }}
-        </div>        
-    </div>
 </div>
-    {{ form_end(registrationForm) }}
+        {{ form_row(registrationForm.Enregistrer,{"attr":{class:'btn btn-dark form-control'}})
+        }}
 
+    {{ form_end(registrationForm) }}
+</div>
 {% endblock %}

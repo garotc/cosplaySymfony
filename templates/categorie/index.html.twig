@@ -3,29 +3,69 @@
 {% block title %}Categorie index{% endblock %}
 
 {% block body %}
-      {% for message in app.flashes('ok') %}
-        <div class="alert alert-success" role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %}
-    <div class="col-10 m-auto form-categorie p-3">
-            {% for categorie in categories %}
-                <div class="row p-3 categorie">
-                    <p class='col-4'>{{ categorie.libelleCategorie }}</p>                
-                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class='col-2 ml-auto btn btn-dark'>Modifier</a>
-                    </td>
-                </div>
-            {% else %}
-                <div class="row">
-                    <p class="col-12 text-align-center">Il n'y a pas encore de catégories</p>
-                </div>
-            {% endfor %}
-
-        <div class="row">
-            <a href="{{ path('categorie_new') }}" class="col-4 m-auto btn btn-primary">Ajouter</a>
-        </div>
+    {% for message in app.flashes('ok') %}
+    <div class="alert alert-success" role="alert">{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+    {% endfor %}
+    {# Table #}
+    <section class="content mt-0">
+        <div class="row">
+            <div class="col-12">
+                    <div class="card">
+                    <div class="card-header">
+                    <h4 class="card-title">
+                    Catégories
+                    </h4>
+                    </div>
+                    {# table header end #}
+                    <div class="card-body">
+                        <table id="tableCategorie" class="table table-bordered table-striped" >
+
+                            <thead>
+                                <tr>
+                                    <th>Libellé</th>
+                                    <th>Modifier</th>
+                                    <th>Supprimer</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                            {# table libelle end #}
+                                {% for categorie in categories %}
+                                <tr>
+                                    <td>{{ categorie.libelleCategorie }}</td>
+
+                                    <td><a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class='btn btn-warning'>Modifier</a></td>
+                                    <td>
+                                    <div class='btn btn-danger'>{{ include('categorie/_delete_form.html.twig') }}</div></td> 
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>Libellé</td>
+                                    <th>Modifier</th>
+                                    <th>Supprimer</th>
+                                </tr>
+                            </tfoot>
+        <div class="row">
+            <a href="{{ path('categorie_new') }}" class="col-2 ml-auto btn btn-dark">Ajouter</a>
+        </div>
+                        </table>
+                                        <div class="row">
+            <a href="{{ path('categorie_new') }}" class="col-2 ml-auto mt-5 btn btn-dark">Ajouter</a>
+                    {# card-body #}
+                    </div>
+                {# card #}
+                </div>
+            {# col-12 #}
+            </div>
+        {# row #}
+        </div>
+
+</section>
 {% endblock %}
