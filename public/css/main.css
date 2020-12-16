@@ -25,6 +25,9 @@ body{
     max-width: 100vw;
     overflow-x: hidden;
 }
+a, a:hover{
+    color: #000;
+}
 /*----------Général end----------*/  
 header{
     position: fixed;
@@ -47,6 +50,7 @@ h1{
     background-color: #111111;
 }
 .navbar{
+    z-index: 99;
     margin: 0!important;
 }
 .navbar-expand-lg
@@ -84,11 +88,11 @@ li:hover{
     background-color: #111;
 }
 /*---------- Menu navbar End ----------*/
-a{
+nav a{
     text-decoration: none;
     color: #fff;
 }
-a:hover{
+nav a:hover{
     color: #fff;
     text-decoration: none;
 }
@@ -116,24 +120,12 @@ h5{
     text-align: center;
     color: #fff;
 }
-/* label{
-    color: #fff;
-} */
 
 /* --------------------------------------moyens appareils--------------------------------------*/
 @media screen and (min-width: 769px) {
 
     section{
         margin-top : 15vh;
-    }
-    .form{
-        margin-left: auto;
-        margin-right: auto;
-        padding: 3vh;
-        width: 50vw;
-        padding-top: 10vh ;
-        padding-bottom: 10vh;
-        background-color: #FFA514;
     }
     body{
         background-image: url(../img/paralax.jpg);
@@ -182,7 +174,7 @@ h5{
         height: 100vh;
         padding-top: 5vh ;
         padding-bottom: 12vh;
-        background-color: #FFA514;
+        /* background-color: #FFA514; */
     }
     .form-sup{
         background-color: #111;
@@ -190,12 +182,8 @@ h5{
         padding: 0!important;
         margin-top: 2vh!important;
     }
-    .edit{
-        margin-top: 1vh!important;
-    }
 }
 /* partie administrateur*/
-
 .user{
     min-height: 10vh;
     min-width: 10vh;
@@ -263,7 +251,10 @@ footer{
     text-align: center;
     margin-left : 0;
     margin-right : 0;
-
+    color: #fff;
+}
+footer a{
+    color: #fff;
 }
 /*----------partie user----------*/
 .useraccount{
@@ -272,3 +263,78 @@ footer{
 .form-error{
     color: red;
 }
+.registerForm{
+    margin-top: 0!important;
+}
+.registerForm, .loginForm, .reinitMdp, .editUserForm, .editInscriprionSoloForm, .editInscriptionGroupe, .editGroupForm{
+    margin:auto;
+    margin-bottom: 5vh;
+    background-color: #fff;
+    border-radius: 0 0 2.5vh 2.5vh;
+    padding: 5vh;
+    box-shadow: 0vh 2vh 3vh #313131;
+}
+.registerForm .form-control, .loginForm .form-control, .editUserForm .form-control{
+    border: none;
+    border-radius: 0;
+    border-bottom: 0.2vh solid;
+    margin-bottom: 2vh;
+}
+.registerForm .btn{
+    margin-top:1vh;
+    border-radius: 1vh;
+}
+.test{
+    margin:auto;
+    margin-top: 5vh;
+    padding:0vh;
+    border-radius: 2.5vh 2.5vh 0 0;
+}
+.test a{
+
+    padding: 2vh;
+}
+.testLeft
+{
+    z-index: 98;
+    background-color: #fff;
+    border-radius: 2.5vh 0 0 0;
+    border-right: #d6d6d6 solid 0.1vh;
+}
+.testRight{
+    background-color: rgb(233, 233, 233);
+    border-radius: 0 2.5vh 0 0;
+    border-bottom: #d6d6d6 solid 0.1vh; 
+}
+.enregistrerLeft{
+    background-color: rgb(233, 233, 233);
+    border-radius: 2.5vh 0 0 0;
+    border-bottom: #d6d6d6 solid 0.1vh; 
+}
+.enregistrerRight{
+    z-index: 98;
+    background-color: #fff;
+    border-radius: 0 2.5vh 0 0;
+}
+.initMdpLeft{
+    background-color: rgb(233, 233, 233);
+    border-radius: 2.5vh 0 0 0;
+    border-right: #d6d6d6 solid 0.1vh;
+    border-bottom: #d6d6d6 solid 0.1vh; 
+}
+.initMdpRight{
+
+    background-color: rgb(233, 233, 233);
+    border-radius: 0 2.5vh 0 0;
+    border-bottom: #d6d6d6 solid 0.1vh; 
+}
+.editUserForm, .editInscriprionSoloForm, .editInscriptionGroupe, .editGroupForm{
+    border-radius: 2.5vh;
+}
+.editInscriprionSoloForm, .editInscriptionGroupe, .editGroupForm{
+    margin-top: 5vh;
+}
+
+
+
+

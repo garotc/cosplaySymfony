@@ -4,18 +4,35 @@
 
 {% block body %}
     {% for flashError in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        <div class="alert alert-danger text-center" role="alert">{{ flashError }}</div>
     {% endfor %}
-    <h1>Réinitialiser mon mot de passe</h1>
-
-    {{ form_start(requestForm) }}
-    <div class="form">
-        <div>
-            Entre tl'adresse email avec laquelle tu t'es inscrit et nous allons t'envoyer un lien !
-        </div>
-            {{ form_row(requestForm.email) }}
-            <button class="btn btn-dark m-auto">Envoyer</button>
+<div class="row">
+    <div class="col-sm-12 col-md-6 test">
+        <div class="row">
+            <a href="{{ path('app_login') }}" class="col-6 text-center initMdpLeft">Me connecter</a>
+            <a href="{{ path('register') }}" class="col-6 text-center noSelect initMdpRight">M'enregistrer</a>
         </div>
     </div>
-    {{ form_end(requestForm) }}
+</div>
+{{ form_start(requestForm) }}
+    <div class="reinitMdp col-sm-12 col-md-6">
+        <div class="form-row mb-1">
+            <h4 class="col-12 text-center">Réinitialiser mon mot de passe</h4>
+        </div>
+        <div class="form-row mb-2">
+            <p class="col-sm-12 text-center">Entre l'adresse email avec laquelle tu t'es inscrit et nous allons t'envoyer un lien !</p>
+        </div>
+        <div class="form-row mb-4">
+            <div class="offset-md-1 col-sm-12 col-md-2 text-center">
+                {{ form_label(requestForm.email) }}
+            </div>
+            {{ form_widget(requestForm.email, {"attr":{
+                class:"col-sm-12 col-md-8"
+            }}) }}                
+        </div>
+        <div class="form-row">
+            <button class="btn btn-dark m-auto col-4">Envoyer</button>
+        </div>
+    </div>
+{{ form_end(requestForm) }}
 {% endblock %}

@@ -9,8 +9,8 @@
 
 
 
-    <div class="form"> 
-    {{ form_start(formulaireSolo) }}
+<div class="row"> 
+    {{ form_start(formulaireSolo, {"attr":{class:"col-sm-12 col-md-6 mt-md-5"}}) }}
     <h2 class="col-6 m-auto">Formulaire d'inscription au concours solo</h2>
         <div class="form-group col-6 mx-auto">
             {{ form_row(formulaireSolo.univerSolo,{"attr":{ placeholder:'DBZ, One Piece, ...', class:'form-control'}}) }}

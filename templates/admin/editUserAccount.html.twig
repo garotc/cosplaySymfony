@@ -4,28 +4,29 @@
 
 {% block body %}
 
-<div class="col-12 p-0 m-0">
-    <div class="form m-sm-0 m-md-auto ">
+<div class="row">
     
-{{ form_start(userForm) }}
-        <h2 class="text-center">Editer le compte de l'utilisateur</h2>
-        <div class="form-group col-sm-12 col-md-6 mx-auto">
-            {{ form_row(userForm.pseudo,{"attr":{ placeholder:'', class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-sm-12 col-md-6 mx-auto">
-            {{ form_row(userForm.nom,{"attr":{ placeholder:'DBZ, One Piece, ...', class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-sm-12 col-md-6 mx-auto">
-            {{ form_row(userForm.prenom,{"attr":{ placeholder:'', class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-sm-12 col-md-6 mx-auto">
-            {{ form_row(userForm.telephone,{"attr":{ placeholder:'', class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-sm-12 col-md-6 mx-auto"> {{ form_row(userForm.modifier,{"attr":{ label:'Enregistrer', class:'btn btn-info m-auto col-12 mb-sm-5 mb-md-0'}}) }}
-        <a href="{{path('admin_aff_user')}}" class='btn btn-dark m-auto col-sm-12 mt-md-3 mt-sm-5'>Retour</a>
-        </div>
+{{ form_start(userForm, {"attr":{class:"col-sm-12 col-md-6 mt-md-5 editUserForm"}}) }}
+<h4 class="text-center mb-3">Editer le compte de l'utilisateur</h4>
+    <div class="form-row mb-3">
+        <div class="col-sm-12 col-md-2">{{form_label(userForm.pseudo)}}</div>
+        {{form_widget(userForm.pseudo,{"attr":{ placeholder:'', class:'form-control col-sm-12 col-md-3'}})}}
+        <div class="col-2 offset-1">{{form_label(userForm.telephone)}}</div>
+        {{ form_widget(userForm.telephone,{"attr":{ placeholder:'', class:'form-control col-sm-12 col-md-3'}}) }}
+    </div>
+    <div class="form-row mb-3">
+        <div class="col-sm-12 col-md-2">{{form_label(userForm.nom)}}</div>
+        {{ form_widget(userForm.nom,{"attr":{ placeholder:'DBZ, One Piece, ...', class:'form-control col-sm-12 col-md-3'}}) }}
+        <div class="offset-1 col-sm-12 col-md-2">{{form_label(userForm.prenom)}}</div>
+        {{ form_widget(userForm.prenom,{"attr":{ placeholder:'', class:'form-control col-sm-12 col-md-3'}}) }}
+    </div>    
+    <div class="form-row"> 
+        <a href="{{path('admin_aff_user')}}" class='btn btn-dark m-auto col-sm-12 col-md-4'>Retour</a>
+        {{ form_widget(userForm.modifier,{"attr":{ label:'Enregistrer', class:'btn btn-info m-auto col-sm-12 col-md-4 mb-sm-5 mb-md-0'}}) }}
+    </div>
         
 {{ form_end(userForm) }}
+</div>
     </div>
 </div>
 

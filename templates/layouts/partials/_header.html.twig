@@ -2,17 +2,20 @@
 <html>
     <head>
         <meta charset='UTF-8'>
-        <title>{% block title %}Cosplay au CGS{% endblock %}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Cosplay au CGS {% block title %}{% endblock %}</title>
 
         <link rel="icon" href="../public/images/favicon.png">
         <!-- Latest compiled and minified CSS -->
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+
         <link rel='stylesheet' href="{{asset('css/main.css')}}">
 
         <!-- DataTables -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.css"/>
 
         {% block stylesheets %}{% endblock %}
+        {% block meta %}{% endblock %}
 
     </head>
     <body class='container-fluid'>

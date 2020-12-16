@@ -216,7 +216,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_aff_inscription_groupe');
         }
 
-        return $this->render('admin/editGroup.html.twig', [
+        return $this->render('admin/editInscriptionGroup.html.twig', [
             'inscriptiongroup' => $inscriptiongroup,
             'editgroupform' => $form->createView(),
         ]);

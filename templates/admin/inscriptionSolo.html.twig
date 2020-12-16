@@ -67,9 +67,9 @@
                                     <td>{{ inscription.DescriptionAccessoireSolo }}</td>
                                     <td>{{ inscription.InfosSolo }}</td>
 
-                                    <td><a href="{{path('admin_inscription_solo_edit',{'id':inscription.id})}}" class="btn btn-info edit">Editer</a>
+                                    <td><a href="{{path('admin_inscription_solo_edit',{'id':inscription.id})}}" class="btn btn-info">Editer</a>
 
-                                    <form method="POST" class='form-sup' action="{{path('admin_inscription_solo_delete',{'id':inscription.id})}}" onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                                    <form method="POST" class='form-sup' action="{{path('admin_inscription_solo_delete',{'id':inscription.id})}}" onSubmit ="return confirm('Confirmer la suppression ?')"  >
                                         <input type="hidden" name="_method" value="SUPSOLO">
                                         <input type="hidden" name="_token" value="{{csrf_token('SUPSOLO' ~ inscription.id)}}">
                                         <input type="submit" class="btn btn-danger" value="Supprimer">
