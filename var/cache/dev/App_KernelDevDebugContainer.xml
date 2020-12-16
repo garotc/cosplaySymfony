@@ -446,9 +446,7 @@
     <service id="App\Form\InscriptionSoloFormType" class="App\Form\InscriptionSoloFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\InscriptionSoloType" class="App\Form\InscriptionSoloType" autowire="true" autoconfigure="true">
-      <tag name="form.type"/>
-    </service>
+    <service id="App\Form\InscriptionSoloTypedontknow" class="App\Form\InscriptionSoloTypedontknow" autowire="true" autoconfigure="true"/>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -940,7 +938,6 @@
         <argument>App\Form\GroupFormType</argument>
         <argument>App\Form\InscriptionGroupFormType</argument>
         <argument>App\Form\InscriptionSoloFormType</argument>
-        <argument>App\Form\InscriptionSoloType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>App\Form\ResetPasswordRequestFormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -1286,7 +1283,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.1SZgaz5"/>
+      <argument type="service" id=".service_locator.ZQDbYb1"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5604,8 +5601,6 @@
     <service id=".abstract.instanceof.App\Form\InscriptionGroupFormType" class="App\Form\InscriptionGroupFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloFormType" class="App\Form\InscriptionSoloFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\InscriptionSoloFormType" class="App\Form\InscriptionSoloFormType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloType" class="App\Form\InscriptionSoloType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\InscriptionSoloType" class="App\Form\InscriptionSoloType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ResetPasswordRequestFormType" class="App\Form\ResetPasswordRequestFormType" autowire="true" abstract="true"/>
@@ -6152,7 +6147,7 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.1SZgaz5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.ZQDbYb1" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CategorieType" type="service" id="App\Form\CategorieType"/>
@@ -6161,7 +6156,6 @@
         <argument key="App\Form\GroupFormType" type="service" id="App\Form\GroupFormType"/>
         <argument key="App\Form\InscriptionGroupFormType" type="service" id="App\Form\InscriptionGroupFormType"/>
         <argument key="App\Form\InscriptionSoloFormType" type="service" id="App\Form\InscriptionSoloFormType"/>
-        <argument key="App\Form\InscriptionSoloType" type="service" id="App\Form\InscriptionSoloType"/>
         <argument key="App\Form\RegistrationFormType" type="service" id="App\Form\RegistrationFormType"/>
         <argument key="App\Form\ResetPasswordRequestFormType" type="service" id="App\Form\ResetPasswordRequestFormType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service" id="form.type.entity"/>

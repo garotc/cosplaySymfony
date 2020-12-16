@@ -31,8 +31,6 @@ Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Reso
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for "App\Form\InscriptionGroupFormType" (parent: .instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionGroupFormType).
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloFormType" (parent: .abstract.instanceof.App\Form\InscriptionSoloFormType).
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for "App\Form\InscriptionSoloFormType" (parent: .instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloFormType).
-Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloType" (parent: .abstract.instanceof.App\Form\InscriptionSoloType).
-Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for "App\Form\InscriptionSoloType" (parent: .instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloType).
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" (parent: .abstract.instanceof.App\Form\RegistrationFormType).
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for "App\Form\RegistrationFormType" (parent: .instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType).
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ResetPasswordRequestFormType" (parent: .abstract.instanceof.App\Form\ResetPasswordRequestFormType).
@@ -143,6 +141,7 @@ Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Reso
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for "monolog.logger.doctrine" (parent: monolog.logger_prototype).
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for "monolog.logger.security" (parent: monolog.logger_prototype).
 Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass: Resolving inheritance for "monolog.logger.debug" (parent: monolog.logger_prototype).
+Symfony\Component\DependencyInjection\Compiler\AutowirePass: Skipping service "App\Form\InscriptionSoloTypedontknow": Class or interface "App\Form\InscriptionSoloTypedontknow" cannot be loaded.
 Symfony\Component\DependencyInjection\Compiler\RemovePrivateAliasesPass: Removed service "Psr\Container\ContainerInterface"; reason: private alias.
 Symfony\Component\DependencyInjection\Compiler\RemovePrivateAliasesPass: Removed service "Symfony\Component\DependencyInjection\ContainerInterface"; reason: private alias.
 Symfony\Component\DependencyInjection\Compiler\RemovePrivateAliasesPass: Removed service "Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface"; reason: private alias.
@@ -479,8 +478,6 @@ Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Re
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".abstract.instanceof.App\Form\InscriptionGroupFormType"; reason: abstract.
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloFormType"; reason: abstract.
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".abstract.instanceof.App\Form\InscriptionSoloFormType"; reason: abstract.
-Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionSoloType"; reason: abstract.
-Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".abstract.instanceof.App\Form\InscriptionSoloType"; reason: abstract.
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType"; reason: abstract.
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".abstract.instanceof.App\Form\RegistrationFormType"; reason: abstract.
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ResetPasswordRequestFormType"; reason: abstract.
@@ -497,6 +494,7 @@ Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Re
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".abstract.instanceof.App\Repository\ResetPasswordRequestRepository"; reason: abstract.
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository"; reason: abstract.
 Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass: Removed service ".abstract.instanceof.App\Repository\UserRepository"; reason: abstract.
+Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass: Removed service "App\Form\InscriptionSoloTypedontknow"; reason: unused.
 Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass: Removed service "uri_signer"; reason: unused.
 Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass: Removed service "reverse_container"; reason: unused.
 Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass: Removed service "cache.app.taggable"; reason: unused.
@@ -609,7 +607,7 @@ Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inl
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".1_ResolvedFormTypeFactory~O7yZWA0" to "form.resolved_type_factory".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service "form.extension" to "form.registry".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service "form.resolved_type_factory" to "form.registry".
-Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.1SZgaz5" to "form.extension".
+Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.ZQDbYb1" to "form.extension".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service "form.choice_list_factory.default" to "form.choice_list_factory.property_access".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service "form.choice_list_factory.property_access" to "form.choice_list_factory.cached".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service "form.type_extension.form.request_handler" to "form.type_extension.form.http_foundation".

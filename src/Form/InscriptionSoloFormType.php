@@ -7,6 +7,7 @@ use App\Entity\InscriptionSolo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,8 +21,19 @@ class InscriptionSoloFormType extends AbstractType
         $builder
             //->add('createdAt')
             ->add('nomPersoSolo', TextType::class, [
-                'label'=>'Nom de mon personnage'])
-            ->add('univerSolo', TextType::class, ['label'=>'Univers'])
+                'label'=>'Nom de mon personnage',
+                "constraints"=>[
+                    new NotBlank([
+                        'message'=>'Veuillez entrer le nom de votre personnage'
+                    ])]
+            ])
+            ->add('univerSolo', TextType::class, [
+                'label'=>'Univers',
+                "constraints"=>[
+                    new NotBlank([
+                        'message'=>'Veuillez entrer l\'univers du personnage'
+                    ])]
+            ])
             ->add('mediaSolo', ChoiceType::class, [
                 'choices'  => [
                     'Musique' => true,
@@ -51,13 +63,14 @@ class InscriptionSoloFormType extends AbstractType
                 'label'=>'J\'ai des accessoire à déposer sur scène avant mon entrée'
             ])
             ->add('descriptionAccessoireSolo', TextareaType::class,['label'=>'Description de mes accessoires à déposer'])
-            ->add('infosSolo', TextareaType::class, ['label'=>'Informations complémentaires'])
+            ->add('infosSolo', TextareaType::class, [
+                'label'=>'Informations complémentaires'])
             //->add('user')
             ->add('categorie',EntityType::class,[
                 'class'=>Categorie::class,
-            'choice_label'=>'libelleCategorie',
-            'multiple'=>false, //choisir plusieurs catégories
-            'expanded'=>false
+                'choice_label'=>'libelleCategorie',
+                'multiple'=>false, //choisir plusieurs catégories
+                'expanded'=>false
             ])
             ->add('Enregistrer', SubmitType::class)
         ;

@@ -258,21 +258,35 @@ footer a{
 }
 /*----------partie user----------*/
 .useraccount{
-    background-color: #FFA514;
+    margin: 5vh auto!important;
+    background-color: #fff;
+    border-radius: 2.5vh;
+    padding: 5vh;
+    box-shadow: 0vh 2vh 3vh #313131;
 }
+.useraccount span{
+    border-radius :1vh;
+    padding: 1vh 2vh;
+    background-color: #d6d6d6;
+   /*  min-width: 10vw!important; */
+    box-shadow: inset 0vh 0.5vh 0.6vh 0.5vh #7e7e7e;
+    min-height: 8vh!important;
+}
+
+/*----------Formulaire----------*/
 .form-error{
     color: red;
 }
 .registerForm{
     margin-top: 0!important;
 }
-.registerForm, .loginForm, .reinitMdp, .editUserForm, .editInscriprionSoloForm, .editInscriptionGroupe, .editGroupForm{
+.registerForm, .loginForm, .reinitMdp, .editUserForm, .editInscriprionSoloForm, .editInscriptionGroupe, .editGroupForm, .soloForm, .formulaireCreaGroupe{
     margin:auto;
     margin-bottom: 5vh;
     background-color: #fff;
-    border-radius: 0 0 2.5vh 2.5vh;
     padding: 5vh;
     box-shadow: 0vh 2vh 3vh #313131;
+    border-radius: 2.5vh;
 }
 .registerForm .form-control, .loginForm .form-control, .editUserForm .form-control{
     border: none;
@@ -328,11 +342,55 @@ footer a{
     border-radius: 0 2.5vh 0 0;
     border-bottom: #d6d6d6 solid 0.1vh; 
 }
-.editUserForm, .editInscriprionSoloForm, .editInscriptionGroupe, .editGroupForm{
-    border-radius: 2.5vh;
+.registerForm, .loginForm{
+    border-radius: 0 0 2.5vh 2.5vh;
 }
 .editInscriprionSoloForm, .editInscriptionGroupe, .editGroupForm{
     margin-top: 5vh;
+}
+.btnInscriptionPrincipale{
+    text-align: center;
+    background-color: #fff;
+    border-radius: 2.5vh;
+    padding: 5vh;
+    margin: auto!important;
+    margin-top: 25vh!important;
+    box-shadow: 0vh 2vh 3vh #313131;
+    font-weight: bold;
+    font-size: 4vh;
+    z-index: 95;
+    transition-duration: ease 5s linear 0s;
+}
+/*div {
+  transition: <property> <duration> <timing-function> <delay>;
+}*/
+.btnInscriptionPrincipale:hover{
+    box-shadow: 0vh 2vh 3vh #000;
+    font-weight: bolder;
+    font-size: 5vh;
+    transition-duration: ease 5s linear 0s;
+}
+.btnInscription{
+    text-align: center;
+    background-color: #d6d6d6;
+    border-radius: 2.5vh;
+    padding: 3vh;
+    margin-top: -5vh!important;
+    box-shadow: 0vh 2vh 3vh #313131;
+    font-size: 3.5vh;
+    z-index: 90;
+    transition-duration: 5s;
+}
+.btnInscription:hover{
+    margin-top: 2vh!important;
+    box-shadow: 0vh 2vh 3vh #313131;
+    transition-duration: 5s;
+}
+/*----------RGPD----------*/
+.rgpd
+{
+    background-color: #fff;
+    border-radius: 2vh;
 }
 
 

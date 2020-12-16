@@ -5,8 +5,36 @@
 {% block body %}
 
 <div class='row'>
-    <div class="col-sm-12 col-md-6 useraccount m-auto p-3">
-        {{ form(userForm) }}
+    {{ form_start(userForm, {"attr":{
+        class:"col-sm-12 col-md-6 mt-md-5 editUserForm"
+    }}) }}
+    <legend class="text-center mb-3">Modifier mes informations</legend>
+    <div class="form-row mb-3">
+        <div class="col-sm-12 col-md-2">
+            {{form_label(userForm.pseudo)}}
+        </div>
+        {{form_widget(userForm.pseudo,{"attr":{ placeholder:'', class:'form-control col-sm-12 col-md-3'}})}}
+        <div class="form-error">{{form_errors(userForm.pseudo)}}</div>
+
+        <div class="col-2 offset-md-1">{{form_label(userForm.telephone)}}</div>
+        {{ form_widget(userForm.telephone,{"attr":{ placeholder:'', class:'form-control col-sm-12 col-md-3'}}) }}
+        <div class="form-error">{{form_errors(userForm.telephone)}}</div>
     </div>
+
+    <div class="form-row mb-3">
+        <div class="col-sm-12 col-md-2">{{form_label(userForm.nom)}}</div>
+        {{ form_widget(userForm.nom,{"attr":{ placeholder:'DBZ, One Piece, ...', class:'form-control col-sm-12 col-md-3'}}) }}
+        <div class="form-error">{{form_errors(userForm.nom)}}</div>
+        
+        <div class="offset-md-1 col-sm-12 col-md-2">{{form_label(userForm.prenom)}}</div>
+        {{ form_widget(userForm.prenom,{"attr":{ placeholder:'', class:'form-control col-sm-12 col-md-3'}}) }}
+        <div class="form-error">{{form_errors(userForm.prenom)}}</div>
+    </div>    
+
+    <div class="form-row"> 
+        <a href="{{path('_app_user_account')}}" class='btn btn-dark m-auto col-sm-12 col-md-4'>Retour</a>
+        {{ form_widget(userForm.modifier,{"attr":{ label:'Enregistrer', class:'btn btn-info m-auto col-sm-12 col-md-4 mb-sm-5 mb-md-0'}}) }}
+    </div>
+    {{ form_end(userForm)}}
 </div>
 {% endblock %}

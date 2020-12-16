@@ -4,51 +4,87 @@
 
 {% block body %}
 
-<div class="container justify-content-center">
-    <div class=" col-6 m-auto">
-
-
 
 <div class="row"> 
-    {{ form_start(formulaireSolo, {"attr":{class:"col-sm-12 col-md-6 mt-md-5"}}) }}
-    <h2 class="col-6 m-auto">Formulaire d'inscription au concours solo</h2>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.univerSolo,{"attr":{ placeholder:'DBZ, One Piece, ...', class:'form-control'}}) }}
+    {{ form_start(formulaireSolo, {"attr":{class:"col-sm-12 col-md-6 mt-md-5 soloForm"}}) }}
+    <legend class="text-center">Formulaire d'inscription au concours solo</legend>
+        <div class="form-row mb-3">
+            <div class="col-12">
+            {{form_label(formulaireSolo.nomPersoSolo)}}</div>
+            {{form_widget(formulaireSolo.nomPersoSolo, {"attr":{
+                class:"form-control col-6"
+            }})}}
+            <div class="form-error">{{form_errors(formulaireSolo.nomPersoSolo)}}</div>
         </div>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.categorie,{"attr":{class:'form-control'}}) }}
+        <div class="form-row mb-3">
+            <div class="col-sm-12 col-md-6 mb-3">
+            {{form_label(formulaireSolo.univerSolo)}}
+            {{form_widget(formulaireSolo.univerSolo, {"attr":{
+                class:"form-control"
+            }})}}
+            <div class="form-error">{{form_errors(formulaireSolo.univerSolo)}}</div>
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+            {{form_label(formulaireSolo.categorie)}}
+            {{form_widget(formulaireSolo.categorie, {"attr":{
+                class:"form-control"
+            }})}}
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <div class="col-sm-12 col-md-6 mb-3">
+            {{form_label(formulaireSolo.mediaSolo)}}
+            {{form_widget(formulaireSolo.mediaSolo, {"attr":{
+                class:"form-control"
+            }})}}
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+            {{form_label(formulaireSolo.envoiMediaSolo)}}
+            {{form_widget(formulaireSolo.envoiMediaSolo, {"attr":{
+                class:"form-control"
+            }})}}
+            </div>
         </div>
 
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.nomPersoSolo,{"attr":{ placeholder:'Nom du personnage', class:'form-control'}}) }}
+        <div class="form-row mb-3">
+            <div class="col-sm-12 col-md-6 mb-3">
+            {{form_label(formulaireSolo.aideSolo)}}
+            {{form_widget(formulaireSolo.aideSolo, {"attr":{
+                class:"form-control col-sm-12"
+            }})}}
+            </div>
+        </div>    
+        <div class="form-row mb-3">
+            <div class="col-sm-12 col-md-6 mb-3">
+            {{form_label(formulaireSolo.accessoireSolo)}}
+            {{form_widget(formulaireSolo.accessoireSolo, {"attr":{
+                class:"form-control col-sm-12",
+                placeholder:'Hache à déposer sur le devant la scène,...'
+            }})}}
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+            {{form_label(formulaireSolo.descriptionAccessoireSolo)}}
+            {{form_widget(formulaireSolo.descriptionAccessoireSolo, 
+            {"attr":{
+                class:"form-control"
+            }})}}
+            </div>
         </div>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.mediaSolo,{"attr":{class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.envoiMediaSolo,{"attr":{class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.aideSolo,{"attr":{class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.accessoireSolo,{"attr":{class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.descriptionAccessoireSolo,{"attr":{ placeholder:'Hache à déposer sur le devant la scène,...', class:'form-control'}}) }}
-        </div>
-        <div class="form-group col-6 mx-auto">
-            {{ form_row(formulaireSolo.infosSolo,{"attr":{ placeholder:'Informations supplémentaires...', class:'form-control'}}) }}
+        <div class="form-row mb-3">
+            <div class="col-sm-12 col-md-12">
+            {{form_label(formulaireSolo.infosSolo)}}
+            </div>
+            {{ form_widget(formulaireSolo.infosSolo,{"attr":{ placeholder:'Informations supplémentaires...', class:'form-control col-sm-12 col-md-6'}}) }}
         </div>
 
-        {# bouton enregistrer #}
-        <div class="form-group col-6 mx-auto"> {{ form_row(formulaireSolo.Enregistrer,{"attr":{ label:'Enregistrer', class:'btn btn-warning m-auto'}}) }}</div>
-
-
+        <div class="form-row">
+            <a href="{{path('inscription_solo')}}" class='btn btn-dark m-auto col-sm-12 col-md-4'>Retour</a>
+            {{ form_widget(formulaireSolo.Enregistrer,{"attr":{
+            class:'btn btn-info m-auto col-sm-12 col-md-4 mb-sm-5 mb-md-0'
+            }}) }}
+        </div>
     {{ form_end(formulaireSolo) }}
-    </div>
-
-    </div>
 </div>
+
 
 {% endblock %}

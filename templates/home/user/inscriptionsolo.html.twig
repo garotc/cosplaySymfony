@@ -8,65 +8,69 @@
 
 <div class='row'>
 <div class="col-sm-12 col-md-6 useraccount m-auto p-3">
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Nom du personnage : {{ infos.NomPersoSolo }}</div>
+    <div class="row">
+        <form method="POST" class='col-2 ml-auto btn' action="{{path('inscription_solo_delete',{'id':infos.id})}}"
+                    onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                        <input type="hidden" name="_method" value="SUPUSERSOLO">
+                            <input type="hidden" name="_token" value="{{csrf_token('SUPUSERSOLO' ~ infos.id)}}">
+                                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                                                    </button>
+        </form>
+    </div>
+    <div class="row text-center">
+        <legend>Mon inscription en solo</legend>
+    </div>
+
+        <div class="row pb-3">
+            <div class="col-sm-12 col-md-4">Nom du personnage </div><span class="col-sm-12 col-md-4">{{ infos.NomPersoSolo }}</span>
         </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Univers du personnage : {{ infos.UniverSolo }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Type de média : {% if infos.MediaSolo == 1 %}
+        <div class="row pb-3">
+            <div class="col-sm-12 col-md-2">Univers</div> <span class="col-sm-12 col-md-4 mb-3">{{ infos.UniverSolo }}</span><div class="col-sm-12 col-md-2">Categorie</div> <span class="col-sm-12 col-md-4">{{ infos.categorie.libelleCategorie }}</span>
+        </div> 
+        <div class="row pb-3">
+            <div class="col-sm-12 col-md-2">Type de média</div> <span class="col-sm-12 col-md-4 mb-3">{% if infos.MediaSolo == 1 %}
             Musique
             {% else %}
             Vidéo
-            {% endif %}
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Lancement du média : {% if infos.envoiMediaSolo == 1 %}
+            {% endif %}</span>
+            <div class="col-sm-12 col-md-2">Lancement du média</div> <span class="col-sm-12 col-md-4">{% if infos.envoiMediaSolo == 1 %}
             Avant l'entrée sur scène
             {% else %}
             Après l'entrée sur scène
-            {% endif %}
-            </div>
+            {% endif %}</span>
         </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Aide pour monter sur scène : {% if infos.AideSolo == 1 %}
+        <div class="row pb-3">
+            <div class="col-sm-12 col-md-2">Aide pour monter sur scène</div><span class="col-sm-12 col-md-4">{% if infos.AideSolo == 1 %}
             Oui
             {% else %}
             Non
-            {% endif %}
-            </div>
+            {% endif %}</span>
         </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Accessoires à déposer sur scène : {% if infos.AccessoireSolo == 1 %}
+        <div class="row pb-3">
+            <div class="col-sm-12 col-md-2">Accessoires à déposer sur scène</div> <span class="col-sm-12 col-md-4 mb-3">{% if infos.AccessoireSolo == 1 %}
             Oui
             {% else %}
             Non
-            {% endif %}
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Déscription des accessoires : {{ infos.DescriptionAccessoireSolo }}</div>
-        </div>
-        <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Autres informations : {{ infos.InfosSolo }}</div>
+            {% endif %}</span>
+            <div class="col-sm-12 col-md-2">Description des accessoires</div> <span class="col-sm-12 col-md-4">{{ infos.DescriptionAccessoireSolo }}</span>
+        </div> 
+        <div class="row pb-5 mb-3">
+            <div class="col-sm-12 col-md-2">Autres informations </div><span class="col-sm-12 col-md-4">{{ infos.InfosSolo }}</span>
         </div>
         <div class="row mb-3">
-            <a href="{{path('inscription_solo_edit',{'id':infos.id})}}" class="btn btn-warning col-4 m-auto">Editer</a>
+            <a href="{{path('inscription_solo_edit',{'id':infos.id})}}" class="btn btn-dark col-4 m-auto">Editer</a>
+        </div>
 
-            <form method="POST" class='col-4 m-auto btn' action="{{path('inscription_solo_delete',{'id':infos.id})}}"
-                onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
-                    <input type="hidden" name="_method" value="SUPUSERSOLO">
-                        <input type="hidden" name="_token" value="{{csrf_token('SUPUSERSOLO' ~ infos.id)}}">
-                                                <input type="submit" class="btn btn-danger" value="Supprimer">
-            </form>
 </div>
 {% else %}
 
+<div class="row">
+    <a href="{{path('inscription_solo_ajout')}}" class="btn col-sm-12 col-md-4 m-auto btnInscriptionPrincipale">M'inscrire au concours solo</a>
+</div>
 
-<a href="{{path('inscription_solo_ajout')}}" class="btn btn-warning col-4 m-auto">M'inscrire au concours</a>
+<div class="row">
+    <a href="{{path('inscription_groupe_ajout')}}" class="btn col-sm-10 col-md-3 m-auto btnInscription">M'inscrire au concours de groupe</a>
+</div>
 
 {% endif %}
-</div>
 {% endblock %}

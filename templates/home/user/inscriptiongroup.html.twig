@@ -7,40 +7,61 @@
 {% if infos %}
 
 <div class='row'>
+
+
 <div class="col-sm-12 col-md-6 useraccount m-auto p-3">
+    <div class="row">
+        <form method="POST" class='col-2 ml-auto btn' action="{{path('inscription_groupe_delete',{'id':infos.id})}}"
+                    onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
+                        <input type="hidden" name="_method" value="SUPINSCRIGROUP">
+                            <input type="hidden" name="_token" value="{{csrf_token('SUPINSCRIGROUP' ~ infos.id)}}">
+                                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+        </form>
+    </div>
+        
+    <legend class="text-center">Mon inscription dans un groupe</legend>
         <div class="row py-1">
-            <div class="col-sm-12 col-md-12">Nom du personnage : {{ infos.NomPersoGroup }}</div>
-            <div class="col-sm-12 col-md-12">Nom du groupe : {{ infos.RelatedGroup.NameGroup }}</div>
-            <hr>
-            <p>Si des informations sur le groupe sont fausses, n'hésite pas à contacter celui qui a fait le groupe</p>
-            <div class="col-sm-12 col-md-12">Univers du groupe : {{ infos.RelatedGroup.universGroup }}</div>
-            <div class="col-sm-12 col-md-12">Au moins une personne a besoin d'aider pour monter sur scène :
+            <div class="col-sm-12 col-md-2">Nom du personnage</div><span class="col-sm-12 col-md-4 mb-3">{{ infos.NomPersoGroup }}</span>
+            <div class="col-sm-12 col-md-2">Nom du groupe</div><span class="col-sm-12 col-md-4"> {{ infos.RelatedGroup.NameGroup }}</span>
+        </div>
+
+        <div class="row mt-5 pt-5 pb-2 text-center">
+            <legend clas="text-center col-12 mb-2 pb-2">Le goupe dans lequel je me suis inscrit</legend>
+            <p class="col-12 text-center">Si des informations sur le groupe sont fausses, n'hésite pas à contacter {{ infos.RelatedGroup.user.pseudo }} qui l'a créé.</p>
+        </div>
+
+        <div class="row mt-3 mb-3 pb-3">
+            <div class="col-sm-12 col-md-8">Univers du groupe</div><span class="col-sm-12 col-md-4"> {{ infos.RelatedGroup.universGroup }}</span>
+        </div>
+
+        <div class="row mt-3 mb-3 pb-3">
+            <div class="col-sm-12 col-md-8">Au moins une personne a besoin d'aide pour monter sur scène </div><span class="col-sm-12 col-md-4"> 
             {% if infos.RelatedGroup.aideSceneGroup == 1 %} 
             Oui
             {%else%}
             Non
             {% endif %}
-            </div>
-            <div class="col-sm-12 col-md-12">Créateur du groupe : {{ infos.RelatedGroup.user.pseudo }}</div> <div class="row py-1">
+            </span>
         </div>
-            <div class="col-sm-12 col-md-12">descriptionAccessoiresGroup : {{ infos.RelatedGroup.descriptionAccessoiresGroup }}</div>
-            <div class="col-sm-12 col-md-12">Infos supplémentaires : {{ infos.RelatedGroup.infosGroup }}</div>
+        <div class="row pb-3">
+            <div class="col-sm-12 col-md-8">Descriptions des accessoires à installer </div><span class="col-sm-12 col-md-4">  {{ infos.RelatedGroup.descriptionAccessoiresGroup }}</span>
+        </div>
+        <div class="row pb-5">
+            <div class="col-sm-12 col-md-8">Informations supplémentaires</div><span class="col-sm-12 col-md-4">  {{ infos.RelatedGroup.infosGroup }}</span>
         </div>
         <div class="row mb-3">
-            <a href="{{path('inscription_groupe_edit',{'id':infos.id})}}" class="btn btn-warning col-4 m-auto">Editer</a>
-
-            <form method="POST" class='col-4 m-auto btn' action="{{path('inscription_groupe_delete',{'id':infos.id})}}"
-                onSubmit ="return confirm('Confirmer la suppression ?')" style="display:inline-block" >
-                    <input type="hidden" name="_method" value="SUPINSCRIGROUP">
-                        <input type="hidden" name="_token" value="{{csrf_token('SUPINSCRIGROUP' ~ infos.id)}}">
-                                                <input type="submit" class="btn btn-danger" value="Supprimer">
-            </form>
+            <a href="{{path('inscription_groupe_edit',{'id':infos.id})}}" class="btn btn-dark col-4 m-auto">Editer</a>
+        </div>
 </div>
 {% else %}
 
+<div class="row">
+    <a href="{{path('inscription_groupe_ajout')}}" class="btn col-sm-12 col-md-4 m-auto btnInscriptionPrincipale">M'inscrire au concours de groupe</a>
+</div>
 
-<a href="{{path('inscription_groupe_ajout')}}" class="btn btn-warning col-4 m-auto">M'inscrire au concours de groupe</a>
+<div class="row">
+    <a href="{{path('inscription_solo_ajout')}}" class="btn col-sm-10 col-md-3 m-auto btnInscription">M'inscrire au concours solo</a>
+</div>
 
 {% endif %}
-</div>
 {% endblock %}

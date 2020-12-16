@@ -19,10 +19,31 @@ class EditAccountUserFormType extends RegistrationFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('pseudo', TextType::class)
-        ->add('nom', TextType::class, ['label'=>'Nom'])
-        ->add('prenom', TextType::class)
-        ->add('telephone', TelType::class)
+        ->add('pseudo', TextType::class,[
+            'constraints'=> [
+            new NotBlank([
+                'message'=>'Veuillez entrer un pseudonyme'
+            ])
+        ]])
+        ->add('nom', TextType::class, [
+            'label'=>'Nom',
+            'constraints'=> [
+            new NotBlank([
+                'message'=>'Veuillez entrer un nom'
+            ])
+        ]])
+        ->add('prenom', TextType::class, [
+            'constraints'=> [
+                new NotBlank([
+                    'message'=>'Veuillez entrer un nom'
+                ])]
+        ])
+        ->add('telephone', TelType::class,[
+            'constraints'=> [
+                new NotBlank([
+                    'message'=>'Veuillez entrer un numéro de téléphone'
+                ])]
+        ])
         ->add('modifier', SubmitType::class)
     ;
     }
