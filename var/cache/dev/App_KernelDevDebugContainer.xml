@@ -385,13 +385,6 @@
         <argument type="service" id=".service_locator.g9CqTPp.App\Controller\Admin\AdminController"/>
       </call>
     </service>
-    <service id="App\Controller\CategorieController" class="App\Controller\CategorieController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.g9CqTPp.App\Controller\CategorieController"/>
-      </call>
-    </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -427,6 +420,9 @@
       <call method="setContainer">
         <argument type="service" id=".service_locator.g9CqTPp.App\Controller\User\UserController"/>
       </call>
+    </service>
+    <service id="App\Form\CategorieFormType" class="App\Form\CategorieFormType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
     </service>
     <service id="App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -932,6 +928,7 @@
         <argument>Vich\UploaderBundle\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\CategorieFormType</argument>
         <argument>App\Form\CategorieType</argument>
         <argument>App\Form\ChangePasswordFormType</argument>
         <argument>App\Form\EditAccountUserFormType</argument>
@@ -1283,7 +1280,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.ZQDbYb1"/>
+      <argument type="service" id=".service_locator.XuYk868"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5571,9 +5568,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminController" class="App\Controller\Admin\AdminController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminController" class="App\Controller\Admin\AdminController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\AdminController" class="App\Controller\Admin\AdminController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CategorieController" class="App\Controller\CategorieController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CategorieController" class="App\Controller\CategorieController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\CategorieController" class="App\Controller\CategorieController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -5589,6 +5583,8 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\User\UserController" class="App\Controller\User\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\User\UserController" class="App\Controller\User\UserController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\User\UserController" class="App\Controller\User\UserController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CategorieFormType" class="App\Form\CategorieFormType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\CategorieFormType" class="App\Form\CategorieFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" abstract="true"/>
@@ -5870,6 +5866,12 @@
         <argument key="loader" type="service" id=".errored..service_locator.C9JCBPC.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.9aMSQQN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categorieRepository" type="service" id="App\Repository\CategorieRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.O30o4K4" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5928,18 +5930,6 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="inscriptionGroup" type="service" id=".errored..service_locator.yU9tfSX.App\Entity\InscriptionGroup"/>
-      </argument>
-    </service>
-    <service id=".service_locator.9aMSQQN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="categorieRepository" type="service" id="App\Repository\CategorieRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.57pSehj" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="categorie" type="service" id=".errored..service_locator.57pSehj.App\Entity\Categorie"/>
       </argument>
     </service>
     <service id=".service_locator.j5_bHjD" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -6008,26 +5998,25 @@
         <argument key="group" type="service" id=".errored..service_locator.q0UdWW5.App\Entity\InscriptionGroup"/>
       </argument>
     </service>
-    <service id=".service_locator.vYyNli0" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.Zinsilt" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\Admin\AdminController::affCategorie" type="service" id=".service_locator.9aMSQQN"/>
         <argument key="App\Controller\Admin\AdminController::affGroup" type="service" id=".service_locator..2YZhIH"/>
         <argument key="App\Controller\Admin\AdminController::affInscriptionGroup" type="service" id=".service_locator..q.MlrH"/>
         <argument key="App\Controller\Admin\AdminController::affInscriptionSolo" type="service" id=".service_locator.4oNQG9h"/>
         <argument key="App\Controller\Admin\AdminController::affUser" type="service" id=".service_locator.RTUGCCW"/>
         <argument key="App\Controller\Admin\AdminController::ajouterCategorie" type="service" id=".service_locator.O30o4K4"/>
+        <argument key="App\Controller\Admin\AdminController::deleteCategorie" type="service" id=".service_locator.O30o4K4"/>
         <argument key="App\Controller\Admin\AdminController::deleteGroup" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController::deleteInscriptionGroup" type="service" id=".service_locator.yU9tfSX"/>
         <argument key="App\Controller\Admin\AdminController::deleteInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController::deleteUser" type="service" id=".service_locator.dNCO0Nf"/>
+        <argument key="App\Controller\Admin\AdminController::editCategorie" type="service" id=".service_locator.O30o4K4"/>
         <argument key="App\Controller\Admin\AdminController::editGroupe" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController::editInscriptionGroup" type="service" id=".service_locator.T1hHirv"/>
         <argument key="App\Controller\Admin\AdminController::editInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController::editUser" type="service" id=".service_locator.dNCO0Nf"/>
-        <argument key="App\Controller\CategorieController::delete" type="service" id=".service_locator.57pSehj"/>
-        <argument key="App\Controller\CategorieController::edit" type="service" id=".service_locator.57pSehj"/>
-        <argument key="App\Controller\CategorieController::index" type="service" id=".service_locator.9aMSQQN"/>
-        <argument key="App\Controller\CategorieController::show" type="service" id=".service_locator.57pSehj"/>
         <argument key="App\Controller\RegistrationController::editAccount" type="service" id=".service_locator.0l1nthY"/>
         <argument key="App\Controller\RegistrationController::register" type="service" id=".service_locator.j5_bHjD"/>
         <argument key="App\Controller\ResetPasswordController::request" type="service" id=".service_locator.A0rcl1e"/>
@@ -6050,23 +6039,22 @@
         <argument key="kernel::loadRoutes" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="kernel::registerContainerConfiguration" type="service" id=".service_locator.C9JCBPC"/>
         <argument key="kernel::terminate" type="service" id=".service_locator.beq5mCo"/>
+        <argument key="App\Controller\Admin\AdminController:affCategorie" type="service" id=".service_locator.9aMSQQN"/>
         <argument key="App\Controller\Admin\AdminController:affGroup" type="service" id=".service_locator..2YZhIH"/>
         <argument key="App\Controller\Admin\AdminController:affInscriptionGroup" type="service" id=".service_locator..q.MlrH"/>
         <argument key="App\Controller\Admin\AdminController:affInscriptionSolo" type="service" id=".service_locator.4oNQG9h"/>
         <argument key="App\Controller\Admin\AdminController:affUser" type="service" id=".service_locator.RTUGCCW"/>
         <argument key="App\Controller\Admin\AdminController:ajouterCategorie" type="service" id=".service_locator.O30o4K4"/>
+        <argument key="App\Controller\Admin\AdminController:deleteCategorie" type="service" id=".service_locator.O30o4K4"/>
         <argument key="App\Controller\Admin\AdminController:deleteGroup" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController:deleteInscriptionGroup" type="service" id=".service_locator.yU9tfSX"/>
         <argument key="App\Controller\Admin\AdminController:deleteInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController:deleteUser" type="service" id=".service_locator.dNCO0Nf"/>
+        <argument key="App\Controller\Admin\AdminController:editCategorie" type="service" id=".service_locator.O30o4K4"/>
         <argument key="App\Controller\Admin\AdminController:editGroupe" type="service" id=".service_locator.1ScvF58"/>
         <argument key="App\Controller\Admin\AdminController:editInscriptionGroup" type="service" id=".service_locator.T1hHirv"/>
         <argument key="App\Controller\Admin\AdminController:editInscriptionSolo" type="service" id=".service_locator.4MW7.KG"/>
         <argument key="App\Controller\Admin\AdminController:editUser" type="service" id=".service_locator.dNCO0Nf"/>
-        <argument key="App\Controller\CategorieController:delete" type="service" id=".service_locator.57pSehj"/>
-        <argument key="App\Controller\CategorieController:edit" type="service" id=".service_locator.57pSehj"/>
-        <argument key="App\Controller\CategorieController:index" type="service" id=".service_locator.9aMSQQN"/>
-        <argument key="App\Controller\CategorieController:show" type="service" id=".service_locator.57pSehj"/>
         <argument key="App\Controller\RegistrationController:editAccount" type="service" id=".service_locator.0l1nthY"/>
         <argument key="App\Controller\RegistrationController:register" type="service" id=".service_locator.j5_bHjD"/>
         <argument key="App\Controller\ResetPasswordController:request" type="service" id=".service_locator.A0rcl1e"/>
@@ -6147,9 +6135,10 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.ZQDbYb1" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.XuYk868" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\CategorieFormType" type="service" id="App\Form\CategorieFormType"/>
         <argument key="App\Form\CategorieType" type="service" id="App\Form\CategorieType"/>
         <argument key="App\Form\ChangePasswordFormType" type="service" id="App\Form\ChangePasswordFormType"/>
         <argument key="App\Form\EditAccountUserFormType" type="service" id="App\Form\EditAccountUserFormType"/>
@@ -6395,12 +6384,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9CqTPp" method="withContext"/>
     </service>
-    <service id=".service_locator.g9CqTPp.App\Controller\CategorieController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
-      <tag name="container.service_locator_context" id="App\Controller\CategorieController"/>
-      <argument>App\Controller\CategorieController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.g9CqTPp" method="withContext"/>
-    </service>
     <service id=".service_locator.g9CqTPp.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
       <argument>App\Controller\HomeController</argument>
@@ -6592,12 +6575,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.vYyNli0"/>
+      <argument type="service" id=".service_locator.Zinsilt"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.vYyNli0"/>
+      <argument type="service" id=".service_locator.Zinsilt"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -6613,7 +6596,6 @@
     <service id=".errored..service_locator.1ScvF58.App\Entity\Group" class="App\Entity\Group"/>
     <service id=".errored..service_locator.T1hHirv.App\Entity\InscriptionGroup" class="App\Entity\InscriptionGroup"/>
     <service id=".errored..service_locator.yU9tfSX.App\Entity\InscriptionGroup" class="App\Entity\InscriptionGroup"/>
-    <service id=".errored..service_locator.57pSehj.App\Entity\Categorie" class="App\Entity\Categorie"/>
     <service id=".errored..service_locator.0l1nthY.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.2wd8YtR.App\Entity\InscriptionSolo" class="App\Entity\InscriptionSolo"/>
     <service id=".errored..service_locator.q0UdWW5.App\Entity\InscriptionGroup" class="App\Entity\InscriptionGroup"/>
@@ -7035,7 +7017,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image" public="false"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.WaGDpDt" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.vYyNli0"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Zinsilt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

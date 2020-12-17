@@ -359,32 +359,40 @@ footer a{
     font-weight: bold;
     font-size: 4vh;
     z-index: 95;
-    transition-duration: ease 5s linear 0s;
+    transition: font-size 1s ease 0s;
 }
 /*div {
   transition: <property> <duration> <timing-function> <delay>;
 }*/
+/*   transition-property: width;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s; */
 .btnInscriptionPrincipale:hover{
     box-shadow: 0vh 2vh 3vh #000;
     font-weight: bolder;
-    font-size: 5vh;
-    transition-duration: ease 5s linear 0s;
+    font-size: 4.1vh;
+    transition-duration: 0.5s;
+
 }
 .btnInscription{
     text-align: center;
     background-color: #d6d6d6;
-    border-radius: 2.5vh;
+    border-radius: 0 0 2.5vh 2.5vh;
     padding: 3vh;
     margin-top: -5vh!important;
     box-shadow: 0vh 2vh 3vh #313131;
     font-size: 3.5vh;
     z-index: 90;
-    transition-duration: 5s;
+    transition-duration: 1s;
+    transition-property: margin-top;
+    transition-timing-function: linear;
+    transition-delay: 0;
 }
 .btnInscription:hover{
-    margin-top: 2vh!important;
+    margin-top: 0vh!important;
     box-shadow: 0vh 2vh 3vh #313131;
-    transition-duration: 5s;
+    transition-duration: 0.5s;
 }
 /*----------RGPD----------*/
 .rgpd

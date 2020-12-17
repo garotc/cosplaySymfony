@@ -26,7 +26,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin/admin", name="admin_admin")
+     * @Route("/admin", name="admin_admin")
      */
     public function index(): Response
     {
@@ -36,6 +36,15 @@ class AdminController extends AbstractController
     }
 //--------------------------------GESTION DES CATEGORIES--------------------------------//
 
+    /**
+     * @Route("/admin/categorie", name="admin_aff_categorie", methods={"GET"})
+     */
+    public function affCategorie(CategorieRepository $categorieRepository): Response
+    {
+        return $this->render('admin/categorie.html.twig', [
+            'categories' => $categorieRepository->findAll(),
+        ]);
+    }
     /**
      * @Route("/admin/categorie/ajout", name="categorie_ajout")
      */
@@ -51,9 +60,45 @@ class AdminController extends AbstractController
        if($form->isSubmitted() && $form->isValid()){
            $em->persist($categorie);
            $em->flush();
+           return $this->redirectToRoute('admin_aff_categorie');
        }
 
-       return $this->render('admin/ajoutCategorie.html.twig',['formCategorie'=>$form->createView()]);
+       return $this->render('admin/editCategorie.html.twig',['categorieform'=>$form->createView()]);
+    }
+    /**
+     * @Route("/admin/categorie/{id}", name="admin_categorie_edit")
+     */
+    public function editCategorie(Categorie $categorie=null, Request $request, EntityManagerInterface $em) : Response
+    {
+        $modif = $categorie->getId() !==null;
+        $categorieId = $categorie->getId();
+        $form = $this->createForm(CategorieFormType::class, $categorie);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em->persist($categorie);
+            $em->flush();
+
+            $this->addFlash ('success', $modif? 'modification effectuées' : 'Catégorie ajoutée');
+            return $this->redirectToRoute('admin_aff_categorie');
+           
+        }
+
+        return $this->render('admin/editCategorie.html.twig', ['categorieform'=> $form->createView(), 'userId'=>$categorieId]);
+    }
+    /**
+     * @Route("/admin/categorie/{id}/sup", name="admin_categorie_delete", methods="SUP")
+     */
+    public function deleteCategorie(Categorie $categorie = null, Request $request, EntityManagerInterface $em)
+    {
+        if ($this->isCsrfTokenValid('SUP'.$categorie->getId(), $request->get('_token'))) {
+            
+            $em->remove($categorie);
+            $em->flush();
+
+            $this->addFlash('message', 'Catégorie supprimée avec succès');
+            return $this->redirectToRoute('admin_aff_categorie');
+        }
     }
 //--------------------------------GESTION USER--------------------------------//
     /**
