@@ -51,7 +51,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash ('success', 'modification effectuées');
+            $this->addFlash ('success', 'Modifications effectuées avec succès');
             return $this->redirectToRoute('_app_user_account');
            
         }
@@ -71,7 +71,7 @@ class UserController extends AbstractController
             $entityManager->remove($inscriptionSolo);
             $entityManager->flush();
         }
-
+        $this->addFlash('message', 'Inscription en solo supprimée avec succès');
         return $this->redirectToRoute('inscription_solo');
     }
 
@@ -111,7 +111,7 @@ class UserController extends AbstractController
            $em->persist($inscriptionSolo);
            $em->flush();
 
-           $this->addFlash('message', $modif ? 'Inscription modifié avec succès' : 'Inscription effectué avec succès');
+           $this->addFlash('message', $modif ? 'Inscription modifiée avec succès' : 'Inscription effectuée avec succès');
 
            return $this->redirectToRoute('inscription_solo');
        }
@@ -158,7 +158,7 @@ class UserController extends AbstractController
            $em->persist($creationGroupe);
            $em->flush();
 
-           $this->addFlash('message', $modif ? 'Groupe modifié avec succès' : 'Inscription effectué avec succès');
+           $this->addFlash('message', $modif ? 'Groupe modifié avec succès' : 'Groupe créé avec succès');
 
            return $this->redirectToRoute('groupe');
        }
@@ -175,6 +175,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($group);
             $entityManager->flush();
+            $this->addFlash('message', 'Groupe supprimé avec succès');
         }
 
         return $this->redirectToRoute('inscription_solo');
@@ -217,7 +218,7 @@ class UserController extends AbstractController
            $em->persist($inscriptionGroup);
            $em->flush();
 
-           $this->addFlash('message', $modif ? 'Inscription modifié avec succès' : 'Inscription effectuée avec succès');
+           $this->addFlash('message', $modif ? 'Inscription en groupe modifiée avec succès' : 'Inscription en groupe effectuée avec succès');
            return $this->redirectToRoute('inscription_groupe');
        }
 
@@ -234,7 +235,7 @@ class UserController extends AbstractController
             $entityManager->remove($group);
             $entityManager->flush();
         }
-
+        $this->addFlash('message', 'Inscription en groupe suprimée avec succès');
         return $this->redirectToRoute('inscription_groupe');
     }
     

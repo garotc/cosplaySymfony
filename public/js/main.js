@@ -7,7 +7,7 @@ $(document).ready( function () {
             "sProcessing": "Traitement en cours ...",
             "sLengthMenu": "Afficher _MENU_ lignes",
             "sZeroRecords": "Aucun résultat trouvé",
-            "sEmptyTable": "Aucune donnée disponible",
+            "sEmptyTable": "Aucunes données disponibles",
             "sInfo": "Lignes _START_ à _END_ sur _TOTAL_",
             "sInfoEmpty": "Aucune ligne affichée",
             "sInfoFiltered": "(Filtrer un maximum de_MAX_)",
@@ -27,7 +27,7 @@ $(document).ready( function () {
     });
 } );
 
-$(document).ready( function () {
+/* $(document).ready( function () {
     $('#tableCategorie').DataTable({
         responsive : true,
         ordering: true,
@@ -53,5 +53,5 @@ $(document).ready( function () {
         },
         paging: true,
     });
-} );
+} ); */
 

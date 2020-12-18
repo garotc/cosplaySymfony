@@ -4,20 +4,20 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
+class ComposerStaticInit3068331682cb0bc588d214cdea87cdff
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -63,6 +63,7 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Validator\\' => 28,
             'Symfony\\Component\\Translation\\' => 30,
+            'Symfony\\Component\\Templating\\' => 29,
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Stopwatch\\' => 28,
             'Symfony\\Component\\Serializer\\' => 29,
@@ -169,8 +170,8 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Zend\\EventManager\\' => 
         array (
@@ -267,6 +268,10 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Symfony\\Component\\Templating\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/templating',
         ),
         'Symfony\\Component\\String\\' => 
         array (
@@ -558,9 +563,9 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
         ),
         'Doctrine\\Common\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
-            1 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
-            2 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Common',
+            0 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
+            1 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Common',
+            2 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
         ),
         'Doctrine\\Bundle\\MigrationsBundle\\' => 
         array (
@@ -596,7 +601,6 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
 
     public static $classMap = array (
         'App\\Controller\\Admin\\AdminController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminController.php',
-        'App\\Controller\\CategorieController' => __DIR__ . '/../..' . '/src/Controller/CategorieController.php',
         'App\\Controller\\HomeController' => __DIR__ . '/../..' . '/src/Controller/HomeController.php',
         'App\\Controller\\RegistrationController' => __DIR__ . '/../..' . '/src/Controller/RegistrationController.php',
         'App\\Controller\\ResetPasswordController' => __DIR__ . '/../..' . '/src/Controller/ResetPasswordController.php',
@@ -608,13 +612,13 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
         'App\\Entity\\InscriptionSolo' => __DIR__ . '/../..' . '/src/Entity/InscriptionSolo.php',
         'App\\Entity\\ResetPasswordRequest' => __DIR__ . '/../..' . '/src/Entity/ResetPasswordRequest.php',
         'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
+        'App\\Form\\CategorieFormType' => __DIR__ . '/../..' . '/src/Form/CategorieFormType.php',
         'App\\Form\\CategorieType' => __DIR__ . '/../..' . '/src/Form/CategorieType.php',
         'App\\Form\\ChangePasswordFormType' => __DIR__ . '/../..' . '/src/Form/ChangePasswordFormType.php',
         'App\\Form\\EditAccountUserFormType' => __DIR__ . '/../..' . '/src/Form/EditAccountUserFormType.php',
         'App\\Form\\GroupFormType' => __DIR__ . '/../..' . '/src/Form/GroupFormType.php',
         'App\\Form\\InscriptionGroupFormType' => __DIR__ . '/../..' . '/src/Form/InscriptionGroupFormType.php',
         'App\\Form\\InscriptionSoloFormType' => __DIR__ . '/../..' . '/src/Form/InscriptionSoloFormType.php',
-        'App\\Form\\InscriptionSoloType' => __DIR__ . '/../..' . '/src/Form/InscriptionSoloType.php',
         'App\\Form\\RegistrationFormType' => __DIR__ . '/../..' . '/src/Form/RegistrationFormType.php',
         'App\\Form\\ResetPasswordRequestFormType' => __DIR__ . '/../..' . '/src/Form/ResetPasswordRequestFormType.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
@@ -4734,6 +4738,25 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
         'Symfony\\Component\\String\\Slugger\\AsciiSlugger' => __DIR__ . '/..' . '/symfony/string/Slugger/AsciiSlugger.php',
         'Symfony\\Component\\String\\Slugger\\SluggerInterface' => __DIR__ . '/..' . '/symfony/string/Slugger/SluggerInterface.php',
         'Symfony\\Component\\String\\UnicodeString' => __DIR__ . '/..' . '/symfony/string/UnicodeString.php',
+        'Symfony\\Component\\Templating\\DelegatingEngine' => __DIR__ . '/..' . '/symfony/templating/DelegatingEngine.php',
+        'Symfony\\Component\\Templating\\EngineInterface' => __DIR__ . '/..' . '/symfony/templating/EngineInterface.php',
+        'Symfony\\Component\\Templating\\Helper\\Helper' => __DIR__ . '/..' . '/symfony/templating/Helper/Helper.php',
+        'Symfony\\Component\\Templating\\Helper\\HelperInterface' => __DIR__ . '/..' . '/symfony/templating/Helper/HelperInterface.php',
+        'Symfony\\Component\\Templating\\Helper\\SlotsHelper' => __DIR__ . '/..' . '/symfony/templating/Helper/SlotsHelper.php',
+        'Symfony\\Component\\Templating\\Loader\\CacheLoader' => __DIR__ . '/..' . '/symfony/templating/Loader/CacheLoader.php',
+        'Symfony\\Component\\Templating\\Loader\\ChainLoader' => __DIR__ . '/..' . '/symfony/templating/Loader/ChainLoader.php',
+        'Symfony\\Component\\Templating\\Loader\\FilesystemLoader' => __DIR__ . '/..' . '/symfony/templating/Loader/FilesystemLoader.php',
+        'Symfony\\Component\\Templating\\Loader\\Loader' => __DIR__ . '/..' . '/symfony/templating/Loader/Loader.php',
+        'Symfony\\Component\\Templating\\Loader\\LoaderInterface' => __DIR__ . '/..' . '/symfony/templating/Loader/LoaderInterface.php',
+        'Symfony\\Component\\Templating\\PhpEngine' => __DIR__ . '/..' . '/symfony/templating/PhpEngine.php',
+        'Symfony\\Component\\Templating\\Storage\\FileStorage' => __DIR__ . '/..' . '/symfony/templating/Storage/FileStorage.php',
+        'Symfony\\Component\\Templating\\Storage\\Storage' => __DIR__ . '/..' . '/symfony/templating/Storage/Storage.php',
+        'Symfony\\Component\\Templating\\Storage\\StringStorage' => __DIR__ . '/..' . '/symfony/templating/Storage/StringStorage.php',
+        'Symfony\\Component\\Templating\\StreamingEngineInterface' => __DIR__ . '/..' . '/symfony/templating/StreamingEngineInterface.php',
+        'Symfony\\Component\\Templating\\TemplateNameParser' => __DIR__ . '/..' . '/symfony/templating/TemplateNameParser.php',
+        'Symfony\\Component\\Templating\\TemplateNameParserInterface' => __DIR__ . '/..' . '/symfony/templating/TemplateNameParserInterface.php',
+        'Symfony\\Component\\Templating\\TemplateReference' => __DIR__ . '/..' . '/symfony/templating/TemplateReference.php',
+        'Symfony\\Component\\Templating\\TemplateReferenceInterface' => __DIR__ . '/..' . '/symfony/templating/TemplateReferenceInterface.php',
         'Symfony\\Component\\Translation\\Catalogue\\AbstractOperation' => __DIR__ . '/..' . '/symfony/translation/Catalogue/AbstractOperation.php',
         'Symfony\\Component\\Translation\\Catalogue\\MergeOperation' => __DIR__ . '/..' . '/symfony/translation/Catalogue/MergeOperation.php',
         'Symfony\\Component\\Translation\\Catalogue\\OperationInterface' => __DIR__ . '/..' . '/symfony/translation/Catalogue/OperationInterface.php',
@@ -5627,10 +5650,10 @@ class ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8fb8bc3a1573fcdffcdc21bca899c49f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3068331682cb0bc588d214cdea87cdff::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3068331682cb0bc588d214cdea87cdff::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit3068331682cb0bc588d214cdea87cdff::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit3068331682cb0bc588d214cdea87cdff::$classMap;
 
         }, null, ClassLoader::class);
     }

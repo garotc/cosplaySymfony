@@ -60,6 +60,7 @@ class AdminController extends AbstractController
        if($form->isSubmitted() && $form->isValid()){
            $em->persist($categorie);
            $em->flush();
+           $this->addFlash('message', 'Catégorie ajoutée avec succès');
            return $this->redirectToRoute('admin_aff_categorie');
        }
 
@@ -79,7 +80,7 @@ class AdminController extends AbstractController
             $em->persist($categorie);
             $em->flush();
 
-            $this->addFlash ('success', $modif? 'modification effectuées' : 'Catégorie ajoutée');
+            $this->addFlash ('success', $modif? 'Modifications effectuées avec succès' : 'Catégorie ajoutée avec succès');
             return $this->redirectToRoute('admin_aff_categorie');
            
         }
@@ -126,11 +127,10 @@ class AdminController extends AbstractController
              $em->persist($user);
              $em->flush();
 
-             $this->addFlash ('success', $modif? 'modification effectuées' : 'user ajouté');
+             $this->addFlash ('success', $modif? 'Modifications effectuées avec succès' : 'user ajouté');
              return $this->redirectToRoute('admin_aff_user');
             
          }
-
          return $this->render('admin/editUserAccount.html.twig', ['userForm'=> $form->createView(), 'userId'=>$userId]);
      }
 
@@ -143,7 +143,6 @@ class AdminController extends AbstractController
             
             $em->remove($user);
             $em->flush();
-
             $this->addFlash('message', 'Utilisateur supprimé avec succès');
             return $this->redirectToRoute('admin_aff_user');
         }
@@ -173,7 +172,7 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('admin_aff_inscription_solo');
         }
-
+        $this->addFlash('message', 'Inscription au concours solo modifiée avec succès');
         return $this->render('admin/editinscriptionSolo.html.twig', [
             'solo' => $solo,
             'editsoloform' => $form->createView(),
@@ -190,7 +189,7 @@ class AdminController extends AbstractController
             $entityManager->remove($solo);
             $entityManager->flush();
         }
-
+        $this->addFlash('message', 'Inscription au concours solo supprimée avec succès');
         return $this->redirectToRoute('admin_aff_inscription_solo');
     }
 //--------------------------------GESTION GROUPE--------------------------------//
@@ -217,7 +216,7 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('admin_aff_groupe');
         }
-
+        $this->addFlash('message', 'Groupe mofifié avec succès');
         return $this->render('admin/editGroup.html.twig', [
             'group' => $group,
             'editgroupform' => $form->createView(),
@@ -233,7 +232,7 @@ class AdminController extends AbstractController
             $entityManager->remove($group);
             $entityManager->flush();
         }
-
+        $this->addFlash('message', 'Groupe supprimé avec succès');
         return $this->redirectToRoute('admin_aff_groupe');
     }
 //--------------------------------INSCRIPTIONS GROUPE--------------------------------//
@@ -244,7 +243,6 @@ class AdminController extends AbstractController
     {
         $creation = $this->getUser();
         $inscriptionsGroup = $repo->findAll();
-        //dd($inscriptionsSolo); 
         return $this->render('admin/inscriptionGroup.html.twig', compact('creation','inscriptionsGroup'));
     }
     /**
@@ -257,7 +255,7 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('message', 'Inscription dans le groupe modifiée avec succès');
             return $this->redirectToRoute('admin_aff_inscription_groupe');
         }
 
@@ -276,7 +274,7 @@ class AdminController extends AbstractController
             $entityManager->remove($inscriptionGroup);
             $entityManager->flush();
         }
-
+        $this->addFlash('messageSup', 'Inscription dans le groupe supprimée avec succès');
         return $this->redirectToRoute('admin_aff_inscription_groupe');
     }
 }

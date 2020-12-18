@@ -3,7 +3,15 @@
 {% block title %}Inscription Solo{% endblock %}
 
 {% block body %}
-
+    {% for messages in app.flashes() %}
+        {% for message in messages %}
+        <div class="alert alert-success text-center" role="alert">{{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endfor %}
 {% if infos %}
 
 <div class='row'>

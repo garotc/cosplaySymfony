@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'b60a9f56399c2ae00daf458ae4ee52f42cec1d48',
+    'reference' => 'f35d94d805a4f6f99282558098a1a9c0a8526554',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'b60a9f56399c2ae00daf458ae4ee52f42cec1d48',
+      'reference' => 'f35d94d805a4f6f99282558098a1a9c0a8526554',
     ),
     'behat/transliterator' => 
     array (
@@ -388,8 +388,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0.0',
-        1 => '1.0',
+        0 => '1.0',
+        1 => '1.0.0',
       ),
     ),
     'psr/simple-cache-implementation' => 
@@ -990,6 +990,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'a97573e960303db71be0dd8fda9be3bca5e0feea',
+    ),
+    'symfony/templating' => 
+    array (
+      'pretty_version' => 'v5.1.9',
+      'version' => '5.1.9.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '42fb44375553828eee4fa12bd255579b9ccfc871',
     ),
     'symfony/translation' => 
     array (
